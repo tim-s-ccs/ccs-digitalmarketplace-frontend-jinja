@@ -1,0 +1,28 @@
+{% macro digitalmarketplaceSummaryContentCheckboxTree(params) %}
+{% if params.value -%}
+  {% set no_children = (params.value | selectattr("options") | list |length) == 0 %}
+
+  {% if no_children %}
+    <ul class="govuk-list govuk-list--bullet govuk-body-s">
+      {% for item in params.value %}
+        <li>{{ item.label }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <ul class="govuk-list">
+      {% for parent_category in params.value %}
+        <li>
+          <p class="govuk-!-margin-bottom-1">{{ parent_category.label }}</p>
+          {% if parent_category.options %}
+            <ul class="govuk-list govuk-list--bullet govuk-body-s">
+              {% for item in parent_category.options %}
+                <li>{{ item.label }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+{% endmacro %}

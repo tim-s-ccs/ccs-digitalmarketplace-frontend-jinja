@@ -1,0 +1,24 @@
+{% macro digitalmarketplaceTemporaryMessage(params) %}
+{%- from 'govuk_frontend_jinja/components/button/macro.html' import govukButton -%}
+
+<div class="dm-temporary-message">
+{% set headingLevel = params.headingLevel | default(2) %}
+
+<h{{ headingLevel }} class="dm-temporary-message__heading">
+    {{ params.heading }}
+</h{{ headingLevel }}>
+{% for message in params.messages%}
+    <p class="dm-temporary-message__message">
+    {{ message.text }}
+    </p>
+{%- endfor %}
+{% if params.link %}
+    <a class="govuk-link" href="{{ params.link.href }}">
+    {{ params.link.text }}
+    </a>
+{%- endif %}
+{% if params.button %}
+    {{ govukButton(params.button) }}
+{%- endif %}
+</div>  
+{% endmacro %}

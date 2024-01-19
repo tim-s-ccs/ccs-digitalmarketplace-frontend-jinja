@@ -1,0 +1,15 @@
+{% macro digitalmarketplaceQuestionFormatHint(question) %}
+{% set hint = question.hint %}
+{% set questionAdvice = question.question_advice %}
+
+{% if hint or questionAdvice %}
+  {% if questionAdvice %}
+    <div class="govuk-body">
+      {{ questionAdvice | safe }}
+    </div>
+  {% endif %}
+  {% if hint %}
+    {{ hint | safe }}
+  {% endif %}
+{% endif %}
+{% endmacro %}

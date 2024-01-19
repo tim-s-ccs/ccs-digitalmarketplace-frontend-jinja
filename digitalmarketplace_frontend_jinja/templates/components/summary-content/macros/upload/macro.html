@@ -1,0 +1,7 @@
+{% macro digitalmarketplaceSummaryContentUpload(params) %}
+{% if params.value %}
+  <p class="govuk-body-s">
+    <a class="govuk-link" href="{{ params.value }}">View uploaded document</a>
+  </p>
+{% endif %}
+{% endmacro %}

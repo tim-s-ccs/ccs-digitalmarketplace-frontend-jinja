@@ -1,0 +1,56 @@
+{% macro digitalmarketplaceQuestionCheckboxes(params) %}
+{%- from "govuk_frontend_jinja/components/checkboxes/macro.html" import govukCheckboxes -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
+
+{% set items = [] %}
+{% set valueToQuestions = {} %}
+
+{% if params.question.followup %}
+  {% for questionId in params.question.followup %}
+    {% for value in params.question.followup[questionId] %}
+      {% if value in valueToQuestions %}
+        {% set _valueToQuestions = valueToQuestions.__setitem__(value, valueToQuestions[value] + " " + questionId) %}
+      {% else %}
+        {% set _valueToQuestions = valueToQuestions.__setitem__(value, questionId) %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+{% for option in params.question.options %}
+  {% set value = option.value if option.value else option.label %}
+  {% set item = {
+    "text": option.label,
+    "value": value,
+    "checked": value in (params.data[name] or [] if params.data else [])
+  } %}
+  {% if option.description %}
+    {% set _item = item.__setitem__('hint', { "html": option.description }) %}
+  {% endif %}
+  {% if valueToQuestions[value] %}
+    {% set _item = item.__setitem__('attributes', { 'data-target': valueToQuestions[value] }) %}
+  {% endif %}
+  {% set _items = items.append(item) %}
+{% endfor %}
+
+{{ govukCheckboxes({
+  "name": name,
+  "idPrefix": "input-" + name,
+  'fieldset': {
+    'legend': {
+      "html": questionText,
+      "classes": "govuk-fieldset__legend--m"
+    }
+  },
+  "items": items,
+  'hint': {
+    "html": digitalmarketplaceQuestionFormatHint(params.question)
+  } if params.question.hint or params.question.question_advice,
+  "errorMessage": {
+    "text": params.errors[name]["message"]
+  } if params.errors and params.errors[name]
+}) }}
+{% endmacro %}

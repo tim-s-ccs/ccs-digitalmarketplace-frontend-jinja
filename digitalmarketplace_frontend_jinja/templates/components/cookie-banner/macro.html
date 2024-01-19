@@ -1,0 +1,75 @@
+{% macro digitalmarketplaceCookieBanner(params) %}
+{%- from 'govuk_frontend_jinja/components/cookie-banner/macro.html' import govukCookieBanner -%}
+
+{% set componentID = params.id if params.id else 'dm-cookie-banner' %}
+{% set serviceName = params.serviceName if params.serviceName else 'Digital Marketplace' %}
+{% set cookieInfoUrl = params.cookieInfoUrl if params.cookieInfoUrl else '/cookies' %}
+{% set cookieSettingsUrl = params.cookieSettingsUrl if params.cookieSettingsUrl else '/users/cookie-settings' %}
+
+{% set html %}
+  <p class="govuk-body">We use some essential cookies to make this service work.</p>
+  <p class="govuk-body">We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
+{% endset %}
+
+{% set acceptHtml %}
+  <p class="dm-cookie-banner__confirmation-message govuk-body">
+    You can <a class="govuk-link" href="{{ cookieSettingsUrl }}">change your cookie settings</a> at any time.
+  </p>
+{% endset %}
+
+{{ govukCookieBanner({
+  "ariaLabel": "Cookies on " + serviceName,
+  "classes": "dm-cookie-banner",
+  "attributes": {
+    "id": componentID,
+    "data-module": "dm-cookie-banner"
+  },
+  "messages": [
+    {
+      "headingText": "Cookies on " + serviceName,
+      "html": html,
+      "classes": 'dm-cookie-banner__button--main',
+      "actions": [
+        {
+          "text": "Accept analytics cookies",
+          "type": "submit",
+          "name": "cookies",
+          "value": "accept",
+          "classes": "dm-cookie-banner__button--accept",
+          "attributes": {
+            "data-accept-cookies": "true"
+          }
+        },
+        {
+          "text": "Reject analytics cookies",
+          "type": "submit",
+          "name": "cookies",
+          "value": "reject",
+          "classes": "dm-cookie-banner__button--reject",
+          "attributes": {
+            "data-accept-cookies": "false"
+          }
+        },
+        {
+          "text": "How " + serviceName + " uses cookies",
+          "href": cookieInfoUrl
+        }
+      ]
+    },
+    {
+      "html": acceptHtml,
+      "hidden": true,
+      "classes": 'dm-cookie-banner--selection-made',
+      "actions": [
+        {
+          "text": "Hide cookie message",
+          "type": "button",
+          "attributes": {
+            "data-hide-cookie-banner": "true"
+          }
+        }
+      ]
+    }
+  ]
+}) }}
+{% endmacro %}

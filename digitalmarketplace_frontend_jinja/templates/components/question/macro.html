@@ -1,0 +1,47 @@
+{% macro digitalmarketplaceQuestion(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/text/macro.html" import digitalmarketplaceQuestionText -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/pricing/macro.html" import digitalmarketplaceQuestionPricing -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/upload/macro.html" import digitalmarketplaceQuestionUpload -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/number/macro.html" import digitalmarketplaceQuestionNumber -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/character-count/macro.html" import digitalmarketplaceQuestionCharacterCount -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/date/macro.html" import digitalmarketplaceQuestionDate -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/radios/macro.html" import digitalmarketplaceQuestionRadios -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/boolean/macro.html" import digitalmarketplaceQuestionBoolean -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/checkboxes/macro.html" import digitalmarketplaceQuestionCheckboxes -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/checkbox-tree/macro.html" import digitalmarketplaceQuestionCheckboxTree -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/list/macro.html" import digitalmarketplaceQuestionList -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/multiquestion/macro.html" import digitalmarketplaceQuestionMultiquestion -%}
+
+<div
+  class="question {% if params.question.hidden %}js-hidden dm-question__related-information" aria-hidden="false{% endif %}"
+  id="{{ params.question.id }}"
+  {% if params.question.followup %}data-module="dm-question-with-follow-up"{% endif %}
+>
+  {% if params.type == 'text' %}
+    {{ digitalmarketplaceQuestionText(params) }}
+  {% elif params.type == 'pricing' %}
+    {{ digitalmarketplaceQuestionPricing(params) }}
+  {% elif params.type == 'upload' %}
+    {{ digitalmarketplaceQuestionUpload(params) }}
+  {% elif params.type == 'number' %}
+    {{ digitalmarketplaceQuestionNumber(params) }}
+  {% elif params.type == 'textbox_large' %}
+    {{ digitalmarketplaceQuestionCharacterCount(params) }}
+  {% elif params.type == 'date' %}
+    {{ digitalmarketplaceQuestionDate(params) }}
+  {% elif params.type == 'radios' %}
+    {{ digitalmarketplaceQuestionRadios(params) }}
+  {% elif params.type == 'boolean' %}
+    {{ digitalmarketplaceQuestionBoolean(params) }}
+  {% elif params.type == 'checkboxes' %}
+    {{ digitalmarketplaceQuestionCheckboxes(params) }}
+  {% elif params.type == 'checkbox_tree' %}
+    {{ digitalmarketplaceQuestionCheckboxTree(params) }}
+  {% elif params.type == 'list' %}
+    {{ digitalmarketplaceQuestionList(params) }}
+  {% elif params.type == 'multiquestion' %}
+    {{ digitalmarketplaceQuestionMultiquestion(params) }}
+  {% endif %}
+</div>
+
+{% endmacro %}

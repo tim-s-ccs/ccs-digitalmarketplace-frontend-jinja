@@ -1,0 +1,32 @@
+"""
+Jinja templates for Digital Marketplace apps.
+"""
+import re
+import ast
+from setuptools import setup, find_packages
+
+
+_version_re = re.compile(r'__version__\s+=\s+(.*)')
+
+with open('digitalmarketplace_frontend_jinja/__init__.py', 'rb') as f:
+    version = str(ast.literal_eval(_version_re.search(
+        f.read().decode('utf-8')).group(1)))
+
+setup(
+    name='ccs-digitalmarketplace-frontend-jinja',
+    version=version,
+    url='https://github.com/tim-s-ccs/ccs-digitalmarketplace-frontend-jinja',
+    license='MIT',
+    author='CCS',
+    description='Jinja templates for Digital Marketplace apps.',
+    long_description=__doc__,
+    packages=find_packages(),
+    package_data={'digitalmarketplace_frontend_jinja': ['py.typed']},
+    include_package_data=True,
+    install_requires=[
+        'jinja2<3',
+        'govuk-frontend-jinja>=2.7.0',
+        'ccs-digitalmarketplace-utils',
+    ],
+    python_requires="~=3.9",
+)

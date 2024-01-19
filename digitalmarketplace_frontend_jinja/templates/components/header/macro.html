@@ -1,0 +1,71 @@
+{% macro digitalmarketplaceHeader(params) %}
+{%- from 'govuk_frontend_jinja/components/header/macro.html' import govukHeader -%}
+
+{% set user_logged_in = true if params.role else false %}
+{% set users_role = params.role | default(none) %}
+
+{% set isAdmin = params.isAdmin | default(false) %}
+
+{% if isAdmin %}
+  {% set adminAppClass = 'dm-admin-header' %}
+  {% set productName = 'Digital Marketplace Admin' %}
+{% else %}
+  {% set adminAppClass = '' %}
+  {% set productName = 'Digital Marketplace' %}
+{% endif %}
+
+{% if user_logged_in %}
+  {% if users_role in['buyer', 'supplier'] %}
+    {% set headerNavigation = [
+      {
+        'text': 'Guidance',
+        'href': 'https://www.gov.uk/guidance/buying-and-selling-on-the-digital-marketplace'
+      },
+      {
+        'text': 'View your account',
+        'href': url_for('external.' + users_role + '_dashboard'),
+        'active': params.active == url_for('external.' + users_role + '_dashboard')
+      },
+      {
+        'text': 'Log out',
+        'href': url_for('external.user_logout'),
+        'active': params.active == url_for('external.user_logout')
+      }
+    ]%}
+  {% else %}
+    {# Any other role #}
+    {% set headerNavigation = [
+      {
+        'text': 'Guidance',
+        'href': 'https://www.gov.uk/guidance/buying-and-selling-on-the-digital-marketplace'
+      },
+      {
+        'text': 'Log out',
+        'href': url_for('external.user_logout'),
+        'active': params.active == url_for('external.user_logout')
+      }
+    ]%}
+  {% endif %}
+{% else %}
+  {% set headerNavigation = [
+    {
+      'text': 'Guidance',
+      'href': 'https://www.gov.uk/guidance/buying-and-selling-on-the-digital-marketplace'
+    },
+    {
+      'text': 'Log in',
+      'href': url_for('external.render_login'),
+      'active': params.active == url_for('external.render_login')
+    }
+  ]%}
+{% endif %}
+{{
+  govukHeader({
+    'assetsPath': '/static/images',
+    'productName': productName,
+    'homepageUrl': '/',
+    'classes': adminAppClass,
+    'navigation': headerNavigation
+  })
+}}
+{% endmacro %}

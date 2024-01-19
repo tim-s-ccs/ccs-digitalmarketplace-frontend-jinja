@@ -1,0 +1,101 @@
+{% macro digitalmarketplaceQuestionCheckboxTree(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/checkboxes/macro.html" import govukCheckboxes -%}
+{%- from "govuk_frontend_jinja/components/accordion/macro.html" import govukAccordion -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+
+{% set name = params.question.id %}
+{% set errorMessage = params.errors[name] if params.errors %}
+{% set values = params.data[name] or [] if params.data else [] %}
+
+<div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+  {% call govukFieldset({
+    "legend": {
+      "html": params.question.question,
+      "classes": "govuk-fieldset__legend--m"
+    },
+    "classes": 'dm-checkbox-tree',
+    "attributes": {
+      'data-module': 'dm-checkbox-tree',
+      'aria-describedby': "input-" + name if errorMessage
+    }
+  }) %}
+    {% if errorMessage %}
+      {{ govukErrorMessage({
+        "text": errorMessage["message"],
+        "id": "input-" + name
+      }) }}
+    {% endif %}
+
+    <div class="govuk-grid-row">
+      <div class="dm-checkbox-tree__summary govuk-grid-column-one-third">
+        <p class="govuk-body">
+          You can choose up to {{ params.question.number_of_items }} categories.
+        </p>
+        <p class="dm-checkbox-tree__summary-total govuk-body">
+          <strong class="dm-checkbox-tree__summary-total-selected"></strong>
+          <span class="dm-checkbox-tree__summary-total-selected-text"></span>
+        </p>
+      </div>
+      <div class="dm-checkbox-tree__options govuk-grid-column-two-thirds">
+        {% if params.question.options[0].options %}
+          {% set accordionItems = [] %}
+
+          {% for option in params.question.options %}
+            {% set checkboxItems = [] %}
+
+            {% for label in option.options %}
+              {% set _checkboxItems = checkboxItems.append({
+                "text": label.label,
+                "value": label.label,
+                "checked": label.label in values
+              }) %}
+            {% endfor %}
+            
+            {% set summaryHtml %}
+              {{ option.options | length }} categories<span class="dm-checkbox-tree__options-number-selected"></span>
+            {% endset %}
+
+            {% set _accordionItems = accordionItems.append({
+              "heading": {
+                "text": option.label
+              },
+              "summary": {
+                "html": summaryHtml
+              },
+              "content": {
+                "html": govukCheckboxes({
+                  "name": name,
+                  "idPrefix": "input-" + name + '-' + loop.index | string,
+                  "items": checkboxItems
+                })
+              }
+            }) %}
+          {% endfor %}
+
+          {{ govukAccordion({
+            "id": "accordion-" + name,
+            "items": accordionItems
+          }) }}
+        {% else %}
+          {% set checkboxItems = []%}
+
+          {% for option in params.question.options %}
+            {% set _checkboxItems = checkboxItems.append({
+              "text": option.label,
+              "value": option.label,
+              "checked": option.label in values
+            }) %}
+          {% endfor %}
+
+          {{ govukCheckboxes({
+            "name": name,
+            "idPrefix": "input-" + name,
+            "items": checkboxItems
+          }) }}
+        {% endif %}
+      </div>
+    </div>
+  {% endcall %}
+</div>
+{% endmacro %}

@@ -1,0 +1,90 @@
+{% macro digitalmarketplaceQuestionList(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/hint/macro.html" import govukHint -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set errorMessage = params.errors[name] if params.errors %}
+{% set values = params.data[name] or [] if params.data else [] %}
+{% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
+{% set hintHtml = digitalmarketplaceQuestionFormatHint(params.question) if params.question.hint or params.question.question_advice %}
+
+{% set describedBy = "" %}
+{% if hintHtml %}
+  {% set hintId = name + "-hint" %}
+  {% set describedBy = hintId %}
+{% endif %}
+{% if errorMessage %}
+  {% set errorId = "input-" + name %}
+  {% set describedBy = describedBy + " " + errorId if describedBy else errorId %}
+{% endif %}
+
+<div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+  {% call govukFieldset({
+    "legend": {
+      "html": questionText,
+      "classes": "govuk-fieldset__legend--m"
+    },
+    "classes": 'dm-list',
+    "attributes": {
+      'data-module': "dm-list",
+      'aria-describedby': describedBy if describedBy
+    }
+  }) %}
+    {% if hintHtml %}
+      {{ govukHint({
+        "html": hintHtml,
+        "id": name + "-hint"
+      }) }}
+    {% endif %}
+
+    {% if errorMessage %}
+      {{ govukErrorMessage({
+        "text": errorMessage["message"],
+        "id": errorId
+      }) }}
+    {% endif %}
+
+    <div class="dm-list__items">
+      {% for index in range(0, 10) %}
+        <div class="govuk-grid-row dm-list__item">
+          <div class="dm-list__item-input-column">
+            {{ govukInput({
+              "name": name,
+              "id": "input-" + name + "-" + index | string,
+              "classes": "dm-list__item-input",
+              "value": values[index],
+              "prefix": {
+                "text": (index + 1) | string + "."
+              },
+              "label": {
+                "html": 'Entry number <span class="dm-list__item-label-counter">' + (index + 1) | string + '</span>',
+                "classes": "govuk-visually-hidden"
+              }
+            }) }}
+          </div>
+          <div class="dm-list__item-remove-column">
+            {{ govukButton({
+              "html": 'Remove <span class="govuk-visually-hidden">entry number <span class="dm-list__item-remove-counter">' + (index + 1) | string + '</span></span>',
+              "classes": 'govuk-button--secondary dm-list__item-remove govuk-visually-hidden',
+              "type": 'button'
+            })}}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        {{ govukButton({
+          "html": 'Add another (<span class="dm-list__item-add-counter">0</span> remaining)',
+          "classes": 'govuk-button--secondary dm-list__item-add govuk-visually-hidden',
+          "type": 'button'
+        })}}
+      </div>
+    </div>
+  {% endcall %}
+</div>
+{% endmacro %}

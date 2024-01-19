@@ -1,0 +1,12 @@
+*.egg-info/
+*.pyc
+.cache
+.mypy_cache
+.pytest_cache
+venv*
+.hypothesis
+local.nix
+.idea/
+dist/
+.DS_store
+node_modules/

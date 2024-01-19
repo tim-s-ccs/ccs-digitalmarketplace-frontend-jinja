@@ -1,0 +1,25 @@
+{% macro digitalmarketplacePreviousNextPagination(params) %}
+{%- from 'govuk_frontend_jinja/components/pagination/macro.html' import govukPagination -%}
+
+{% if params.previousPage %}
+  {% set previousPage = {
+    "text": params.previousPage.title,
+    "labelText": params.previousPage.label,
+    "href": params.previousPage.url
+  } %}
+{% endif %}
+
+{% if params.nextPage %}
+  {% set nextPage = {
+    "text": params.nextPage.title,
+    "labelText": params.nextPage.label,
+    "href": params.nextPage.url
+  } %}
+{% endif %}
+
+{{ govukPagination({
+  "next": nextPage,
+  "previous": previousPage,
+  "landmarkLabel": params.ariaLabel if params.ariaLabel
+}) }}
+{% endmacro %}

@@ -1,0 +1,73 @@
+{% macro digitalmarketplaceQuestionBoolean(params) %}
+{%- from "govuk_frontend_jinja/components/radios/macro.html" import govukRadios -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set valueToQuestions = {} %}
+
+{% if params.question.followup %}
+  {% for questionId in params.question.followup %}
+    {% for value in params.question.followup[questionId] %}
+      {% if value in valueToQuestions %}
+        {% set _valueToQuestions = valueToQuestions.__setitem__(value, valueToQuestions[value] + " " + questionId) %}
+      {% else %}
+        {% set _valueToQuestions = valueToQuestions.__setitem__(value, questionId) %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+{% set options = [
+  {
+    "label": "Yes",
+    "value": true
+  },
+  {
+    "label": "No",
+    "value": false
+  }
+] %}
+{% set items = [] %}
+
+{% for option in options %}
+  {% set item = {
+    "text": option.label,
+    'value': option.value,
+    "checked": option.value == params.data[name] if params.data
+  } %}
+  {% if valueToQuestions[option.value] %}
+    {% set _item = item.__setitem__('attributes', { 'data-target': valueToQuestions[option.value] }) %}
+  {% endif %}
+  {% set _items = items.append(item) %}
+{% endfor %}
+
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% elif params.frameworkReusedFrom and params.data and not params.data[name] is undefined %}
+  {% set errorMessage = {
+    "text": "This answer is from your " + params.frameworkReusedFrom + " declaration",
+    "visuallyHiddenText": "Notice"
+  } %}
+  {% set formGroupClasses = "dm-form-group--declaration-reuse" %}
+{% endif %}
+
+{{ govukRadios({
+  "name": name,
+  "idPrefix": "input-" + name,
+  "classes": "govuk-radios--inline",
+  "fieldset": {
+    "legend": {
+      "html": params.question.question,
+      "classes": "govuk-fieldset__legend--m"
+    }
+  },
+  "items": items,
+  "formGroup": {
+    "classes": formGroupClasses
+  },
+  "hint": {
+    "html": digitalmarketplaceQuestionFormatHint(params.question)
+  } if params.question.hint or params.question.question_advice,
+  "errorMessage": errorMessage if errorMessage
+}) }}
+{% endmacro %}

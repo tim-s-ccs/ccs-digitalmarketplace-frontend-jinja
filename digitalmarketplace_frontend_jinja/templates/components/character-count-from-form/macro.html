@@ -1,0 +1,25 @@
+{% macro digitalmarketplaceCharacterCountFromForm(params) %}
+{%- from 'govuk_frontend_jinja/components/character-count/macro.html' import govukCharacterCount -%}
+
+{% set errorMessage = params.form.errors[0] if params.form.errors %}
+{% set name = params.form.name %}
+
+{{ govukCharacterCount({
+  "label": {
+    "text": params.form.question,
+    "classes": params.label.classes if params.label and params.label.classes else "govuk-label--m",
+    "isPageHeading": params.label.isPageHeading if params.label
+  },
+  "name": name,
+  "id": "input-" + name,
+  "maxwords": params.form.widget.max_length_in_words,
+  "value": params.form.data if params.form.data,
+  "classes": params.classes,
+  "hint": {
+    "html": params.form.hint
+  } if params.form.hint,
+  "errorMessage": {
+    "text": errorMessage
+  } if errorMessage
+}) }}
+{% endmacro %}

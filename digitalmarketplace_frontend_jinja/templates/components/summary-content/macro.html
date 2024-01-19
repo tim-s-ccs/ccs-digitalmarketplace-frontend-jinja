@@ -1,0 +1,51 @@
+{% macro digitalmarketplaceSummaryContent(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/text/macro.html" import digitalmarketplaceSummaryContentText -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/list/macro.html" import digitalmarketplaceSummaryContentList -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/upload/macro.html" import digitalmarketplaceSummaryContentUpload -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/service-id/macro.html" import digitalmarketplaceSummaryContentServiceId -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/radios/macro.html" import digitalmarketplaceSummaryContentRadios -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/boolean/macro.html" import digitalmarketplaceSummaryContentBoolean -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/number/macro.html" import digitalmarketplaceSummaryContentNumber -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/checkbox-tree/macro.html" import digitalmarketplaceSummaryContentCheckboxTree -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/multiquestion/macro.html" import digitalmarketplaceSummaryContentMultiquestion -%}
+
+{% set textOptions = ['text', 'text_bold', 'textbox', 'textbox_large', 'pricing', 'date'] %}
+
+{% if params.type in textOptions %}
+  {{ digitalmarketplaceSummaryContentText({
+    "text": params.value
+  }) }}
+{% elif params.type == 'list' or params.type == 'checkboxes'%}
+  {{ digitalmarketplaceSummaryContentList({
+    "items": params.value
+  }) }}
+{% elif params.type == 'upload' %}
+  {{ digitalmarketplaceSummaryContentUpload({
+    "value": params.value
+  }) }}
+{% elif params.type == 'service_id' %}
+  {{ digitalmarketplaceSummaryContentServiceId({
+    "value": params.value
+  }) }}
+{% elif params.type == 'radios' %}
+  {{ digitalmarketplaceSummaryContentRadios({
+    "value": params.value
+  }) }}
+{% elif params.type == 'boolean' %}
+  {{ digitalmarketplaceSummaryContentBoolean({
+    "value": params.value
+  }) }}
+{% elif params.type == 'number'%}
+  {{ digitalmarketplaceSummaryContentNumber({
+    "value": params.value
+  }) }}
+{% elif params.type == 'checkbox_tree' %}
+  {{ digitalmarketplaceSummaryContentCheckboxTree({
+    "value": params.value
+  }) }}
+{% elif params.type == 'multiquestion' %}
+  {{ digitalmarketplaceSummaryContentMultiquestion({
+    'value': params.value
+  }) }}
+{% endif %}
+{% endmacro %}

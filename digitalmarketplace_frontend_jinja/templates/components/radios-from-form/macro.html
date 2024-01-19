@@ -1,0 +1,47 @@
+{% macro digitalmarketplaceRadiosFromForm(params) %}
+{%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
+
+{% set errorMessage = params.form.errors[0] if params.form.errors %}
+{% set name = params.form.name %}
+{% set items = params['items'] if 'items' in params else [] %}
+{% set legend = params.fieldset.legend if params.fieldset and params.fieldset.legend else {} %}
+
+{% if 'items' not in params %}
+  {% for option in params.form.options %}
+    {% set item = {
+      "value": option["value"],
+      "text": option["label"]
+    } %}
+
+    {% if params.form.data == option["value"] %}
+      {% set _item = item.__setitem__("checked", true) %}
+    {% endif %}
+
+    {% if "description" in option %}
+      {% set _item = item.__setitem__("hint", { 'text': option["description"] }) %}
+    {% endif %}
+
+    {% set _items = items.append(item) %}
+  {% endfor %}
+{% endif %}
+
+{{ govukRadios({
+  "fieldset": {
+    "legend": {
+      "text": params.form.question,
+      "classes": legend.classes if legend.classes else "govuk-fieldset__legend--m",
+      "isPageHeading": legend.isPageHeading
+    }
+  },
+  "name": name,
+  "idPrefix": "input-" + name,
+  "items": items,
+  "classes": params.classes,
+  "hint": {
+    "text": params.form.hint
+  } if params.form.hint,
+  "errorMessage": {
+    "text": errorMessage
+  } if errorMessage
+}) }}
+{% endmacro %}

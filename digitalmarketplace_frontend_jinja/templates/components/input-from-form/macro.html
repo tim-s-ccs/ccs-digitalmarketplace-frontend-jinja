@@ -1,0 +1,24 @@
+{% macro digitalmarketplaceInputFromForm(params) %}
+{%- from 'govuk_frontend_jinja/components/input/macro.html' import govukInput -%}
+
+{% set errorMessage = params.form.errors[0] if params.form.errors %}
+{% set name = params.form.name %}
+
+{{ govukInput({
+  "label": {
+    "text": params.form.question,
+    "classes": params.label.classes if params.label and params.label.classes else "govuk-label--m",
+    "isPageHeading": params.label.isPageHeading if params.label
+  },
+  "name": name,
+  "id": "input-" + name,
+  "value": params.form.data,
+  "classes": params.classes,
+  "hint": {
+    "html": params.form.hint
+  } if params.form.hint,
+  "errorMessage": {
+    "text": errorMessage
+  } if errorMessage
+}) }}
+{% endmacro %}

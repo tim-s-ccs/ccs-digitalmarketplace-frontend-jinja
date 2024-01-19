@@ -1,0 +1,27 @@
+{% macro digitalmarketplaceAlert(params) %}
+{%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
+
+{% set html %}
+    {% if params.titleText or params.titleHtml %}
+        {% set headingLevel = params.headingLevel | default(2) %}
+
+        <h{{ headingLevel }} class="govuk-notification-banner__heading">
+            {{ params.titleHtml|safe if params.titleHtml else params.titleText }}
+        </h{{ headingLevel }}>
+    {% endif %}
+
+    {% if params.html or params.text %}
+        <p class="govuk-body">{{ params.html|safe if params.html else params.text }}</p>
+    {% endif %}
+{% endset %}
+
+{% set classes = params.classes or "" %}
+
+{{ govukNotificationBanner({
+    "type": params.type,
+    "titleText": "There is a problem" if params.type == 'error' else "",
+    "html": html,
+    "classes": classes + " dm-notification-banner--warning" if params.type == 'error' else classes,
+    "attributes": params.attributes
+}) }}
+{% endmacro %}

@@ -1,0 +1,218 @@
+{% macro digitalmarketplaceQuestionPricing(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
+{%- from "govuk_frontend_jinja/components/select/macro.html" import govukSelect -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+
+{% set name = params.question.id %}
+{% set errorMessage = params.errors[name] if params.errors %}
+{% set minimumPrice = params.question.fields.minimum_price %}
+{% set maximumPrice = params.question.fields.maximum_price %}
+{% set priceUnit = params.question.fields.price_unit %}
+{% set priceInterval = params.question.fields.price_interval %}
+
+{% call govukFieldset({
+  "legend": {
+    "html": params.question.question,
+    "classes": "govuk-fieldset__legend--m"
+  },
+  "classes": 'dm-pricing'
+}) %}
+  {% if params.question.question_advice %}
+    <p class="govuk-body">
+      {{ params.question.question_advice }}
+    </p>
+  {% endif %}
+
+  <div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+    {% if errorMessage %}
+      {{ govukErrorMessage({
+        "text": errorMessage["message"],
+        "id": "input-" + name
+      }) }}
+    {% endif %}
+
+    {% if priceUnit %}
+      {% set questionText = "Unit (optional)" if 'price_unit' in (params.question.optional_fields or []) else "Unit" %}
+      {% set value = params.data[priceUnit] if params.data %}
+
+      {{ govukSelect({
+        "id": "input-" + priceUnit,
+        'name': priceUnit,
+        "label": {
+          "html": questionText
+        },
+        "items": [
+          {
+            'text': "",
+            "value": "",
+            "selected": "" == value
+          },
+          {
+            "text": "a unit",
+            "value": "Unit",
+            "selected": "Unit" == value
+          },
+          {
+            "text": "a licence",
+            "value": "Licence",
+            "selected": "Licence" == value
+          },
+          {
+            "text": "a user",
+            "value": "User",
+            "selected": "User" == value
+          },
+          {
+            "text": "a device",
+            "value": "Device",
+            "selected": "Device" == value
+          },
+          {
+            "text": "a instance",
+            "value": "Instance",
+            "selected": "Instance" == value
+          },
+          {
+            "text": "a server",
+            "value": "Server",
+            "selected": "Server" == value
+          },
+          {
+            "text": "a virtual machine",
+            "value": "Virtual machine",
+            "selected": "Virtual machine" == value
+          },
+          {
+            "text": "a transaction",
+            "value": "Transaction",
+            "selected": "Transaction" == value
+          },
+          {
+            "text": "a megabyte",
+            "value": "Megabyte",
+            "selected": "Megabyte" == value
+          },
+          {
+            "text": "a gigabyte",
+            "value": "Gigabyte",
+            "selected": "Gigabyte" == value
+          },
+          {
+            "text": "a terabyte",
+            "value": "Terabyte",
+            "selected": "Terabyte" == value
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    {% if priceInterval %}
+      {% set questionText = "Time (optional)" if 'price_interval' in (params.question.optional_fields or []) else "Time" %}
+      {% set value = params.data[priceInterval] if params.data %}
+
+      {{ govukSelect({
+        "id": "input-" + priceInterval,
+        "name": priceInterval,
+        "label": {
+          "text": questionText
+        },
+        "items": [
+          {
+            "text": "",
+            "value": "",
+            "selected": "" == value
+          },
+          {
+            "text": "a second",
+            "value": "Second",
+            "selected": "Second" == value
+          },
+          {
+            "text": "a minute",
+            "value": "Minute",
+            "selected": "Minute" == value
+          },
+          {
+            "text": "a hour",
+            "value": "Hour",
+            "selected": "Hour" == value
+          },
+          {
+            "text": "a day",
+            "value": "Day",
+            "selected": "Day" == value
+          },
+          {
+            "text": "a week",
+            "value": "Week",
+            "selected": "Week" == value
+          },
+          {
+            "text": "a month",
+            "value": "Month",
+            "selected": "Month" == value
+          },
+          {
+            "text": "a quarter",
+            "value": "Quarter",
+            "selected": "Quarter" == value
+          },
+          {
+            "text": "a 6 months",
+            "value": "6 months",
+            "selected": "6 months" == value
+          },
+          {
+            "text": "a year",
+            "value": "Year",
+            "selected": "Year" == value
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    {% if minimumPrice %}
+      {% set questionText = "Minimum price (optional)" if 'minimum_price' in (params.question.optional_fields or []) else "Minimum price" %}
+      {% set value = params.data[minimumPrice] if params.data %}
+
+      {{ govukInput({
+        "id": "input-" + minimumPrice,
+        "name": minimumPrice,
+        "classes": "govuk-input--width-10",
+        "label": {
+          "text": questionText
+        },
+        'hint': {
+          "text": 'For example, £199.99'
+        },
+        "value": value,
+        "prefix": {
+          "text": "£"
+        }
+      }) }}
+    {% endif %}
+
+    {% if maximumPrice %}
+      {% set questionText = "Maximum price (optional)" if 'maximum_price' in (params.question.optional_fields or []) else "Maximum price" %}
+      {% set value = params.data[maximumPrice] if params.data %}
+
+      {{ govukInput({
+        "id": "input-" + maximumPrice,
+        "name": maximumPrice,
+        "classes": "govuk-input--width-10",
+        'label': {
+          "text": questionText
+        },
+        "hint": {
+          "text": 'For example, £199.99'
+        },
+        "value": value,
+        'prefix': {
+          "text": "£"
+        }
+      }) }}
+    {% endif %}
+  </div>
+{% endcall %}
+{% endmacro %}
