@@ -1,0 +1,21 @@
+{% macro digitalmarketplaceDocuments(params) %}
+<ul class="dm-document-list">
+{% for item in params['items'] %}
+    <li class="dm-document-list-item">
+    <a href="{{ item.link }}" class="dm-document-link{% if item.fileType %}-with-icon{% endif %}"
+        {% if item.download %}download {% endif %}
+        {% if item.analytics %}
+        {% if item.analytics.name %}data-analytics="{{ item.analytics.name }}" {% endif %}
+        {% if item.analytics.category %}data-analytics-category="{{ item.analytics.category }}" {% endif %}
+        {% if item.analytics.action %}data-analytics-action="{{ item.analytics.action }}" {% endif %}
+        {% if item.analytics.label %}data-analytics-label="{{ item.analytics.label }}" {% endif %}
+        {% if item.analytics.target %}data-analytics-target-selector="{{ item.analytics.target }}" {% endif %}
+        {% endif %}
+    >
+        {% if item.fileType %}<span class="dm-document-icon">{{ item.fileType }}<span class="govuk-visually-hidden"> document:</span></span>{% endif %}
+        {{ item.title }}
+    </a>
+    </li>
+{% endfor %}
+</ul>
+{% endmacro %}

@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "name": "ccs-digitalmarketplace-frontend-jinja",
+  "version": "0.0.0",
+  "author": "CCS",
+  "license": "MIT",
+  "devDependencies": {
+    "ccs-digitalmarketplace-govuk-frontend": "^5.1.0-beta.1"
+  }
+}

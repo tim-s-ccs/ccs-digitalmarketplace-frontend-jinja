@@ -1,0 +1,9 @@
+-r requirements.txt
+
+flake8
+mypy
+pytest
+lxml
+flask
+
+types-Jinja2

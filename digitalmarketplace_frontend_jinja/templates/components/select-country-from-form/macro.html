@@ -1,0 +1,34 @@
+{% macro digitalmarketplaceSelectCountryFromForm(params) %}
+{%- from 'govuk_frontend_jinja/components/select/macro.html' import govukSelect -%}
+
+{% set errorMessage = params.form.errors[0] if params.form.errors %}
+{% set name = params.form.name %}
+
+{% set countries = [] %}
+{% if not params.form.data %}
+  {% set _countries = countries.append({"value": "", "text": "", "selected": not params.form.data }) %}
+{% endif %}
+
+{% for country in params.countries %}
+  {% set _countries = countries.append({"value": country[1], "text": country[0], "selected": params.form.data == country[1] }) %}
+{% endfor %}
+
+{{ govukSelect({
+  "id": "input-" + name,
+  "name": name,
+  "label": {
+    "text": "Country",
+    "classes": "govuk-label--m"
+  },
+  "classes": 'dm-select-country govuk-input--width-10',
+  "items": countries,
+  "attributes": {
+    'data-module': 'dm-select-country',
+    'data-assets-path': params.assetsPath
+  },
+  "errorMessage": {
+    "text": errorMessage
+  } if errorMessage,
+  "value": params.form.data if params.form.data
+}) }}
+{% endmacro %}

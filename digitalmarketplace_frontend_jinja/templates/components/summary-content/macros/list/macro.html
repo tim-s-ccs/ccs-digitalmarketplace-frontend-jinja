@@ -1,0 +1,16 @@
+{% macro digitalmarketplaceSummaryContentList(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/text/macro.html" import digitalmarketplaceSummaryContentText -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/list-items/macro.html" import digitalmarketplaceSummaryContentListItems -%}
+
+{% if params['items'] | length == 0 %}
+  {{ digitalmarketplaceSummaryContentText({
+    "text": ''
+  }) }}
+{% elif params['items'] | length == 1 %}
+  {{ digitalmarketplaceSummaryContentText({
+    "text": params['items'][0]
+  }) }}
+{% elif params['items'] | length > 1 %}
+  {{ digitalmarketplaceSummaryContentListItems(params) }}
+{% endif %}
+{% endmacro %}

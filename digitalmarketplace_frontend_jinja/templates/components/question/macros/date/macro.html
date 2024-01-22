@@ -1,0 +1,55 @@
+{% macro digitalmarketplaceQuestionDate(params) %}
+{%- from "govuk_frontend_jinja/components/date-input/macro.html" import govukDateInput -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
+
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% elif params.frameworkReusedFrom and params.data and params.data[name] %}
+  {% set errorMessage = {
+    "text": "This answer is from your " + params.frameworkReusedFrom + " declaration",
+    "visuallyHiddenText": "Notice"
+  } %}
+  {% set formGroupClasses = "dm-form-group--declaration-reuse" %}
+{% endif %}
+
+{% if params.data and params.data[name] %}
+  {% set dateParts = params.data[name].split('-') | reverse | list %}
+{% endif %}
+
+{% set items = []%}
+{% for fieldName, fieldLength in
+  [
+    ["day", "2"],
+    ["month", "2"],
+    ["year", "4"]
+  ]
+%}
+  {% set _items = items.append({
+    "classes": "govuk-input--width-" + fieldLength + (" govuk-input--error" if errorMessage else ""),
+    "name": fieldName,
+    "value": dateParts[loop.index - 1] if dateParts
+  }) %}
+{% endfor %}
+
+{{ govukDateInput({
+  "id": "input-" + name,
+  "namePrefix": name,
+  "fieldset": {
+    "legend": {
+      "text": questionText,
+      "classes": "govuk-fieldset__legend--m"
+    }
+  },
+  "formGroup": {
+    "classes": formGroupClasses
+  },
+  'hint': {
+    'html': digitalmarketplaceQuestionFormatHint(params.question)
+  } if params.question.hint or params.question.question_advice,
+  "errorMessage": errorMessage if errorMessage,
+  "items": items
+}) }}
+{% endmacro %}

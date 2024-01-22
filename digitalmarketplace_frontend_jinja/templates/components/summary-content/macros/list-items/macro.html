@@ -1,0 +1,7 @@
+{% macro digitalmarketplaceSummaryContentListItems(params) %}
+<ul class="govuk-list govuk-list--bullet govuk-body-s">
+  {% for item in params['items'] %}
+    <li>{{ item }}</li>
+  {% endfor %}
+</ul>
+{% endmacro %}

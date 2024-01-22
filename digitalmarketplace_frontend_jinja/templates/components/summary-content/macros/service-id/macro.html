@@ -1,0 +1,13 @@
+{% macro digitalmarketplaceSummaryContentServiceId(params) %}
+{% if params.value %}
+  <div class="service-id">
+    {% if params.value|int(-1) != -1 %}
+      {% for chunk in params.value | string | slice(4) -%}
+        <span class="service-id-chunk">{{ chunk | join("") }}</span>
+      {%- endfor %}
+    {% else %}
+        <span class="service-id-chunk">{{ params.value }}</span>
+    {% endif %}
+  </div>
+{% endif %}
+{% endmacro %}

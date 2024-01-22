@@ -1,0 +1,50 @@
+{% macro digitalmarketplaceQuestionUpload(params) %}
+{%- from "govuk_frontend_jinja/components/file-upload/macro.html" import govukFileUpload -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+
+{% set name = params.question.id %}
+{% set value = params.data[name] if params.data %}
+
+{% if params.question.hint or params.question.question_advice or value %}
+  {% set hintHtml %}
+    {{ digitalmarketplaceQuestionFormatHint(params.question) }}
+    {% if value %}
+      <ul class="dm-document-upload-list">
+        <li class="dm-document-list-item">
+          <span class="dm-document-upload-with-icon">
+            <span class="dm-document-icon"></span>
+            Document uploaded {{ value | parse_document_upload_time | datetimeformat }}
+          </span>
+        </li>
+      </ul>
+    {% endif %}
+  {% endset %}
+{% endif %}
+
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% elif params.frameworkReusedFrom and value %}
+  {% set errorMessage = {
+    "text": "This answer is from your " + params.frameworkReusedFrom + " declaration",
+    "visuallyHiddenText": "Notice"
+  } %}
+  {% set formGroupClasses = "dm-form-group--declaration-reuse" %}
+{% endif %}
+
+
+{{ govukFileUpload({
+  "name": name,
+  "id": "input-" + name,
+  "label": {
+    "html": params.question.question,
+    'classes': "govuk-label--m"
+  },
+  "formGroup": {
+    "classes": formGroupClasses
+  },
+  "hint": {
+    'html': hintHtml
+  } if hintHtml,
+  "errorMessage": errorMessage if errorMessage
+}) }}
+{% endmacro %}

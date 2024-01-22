@@ -1,0 +1,14 @@
+{% macro digitalmarketplaceSummaryContentRadios(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/text/macro.html" import digitalmarketplaceSummaryContentText -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/list/macro.html" import digitalmarketplaceSummaryContentList -%}
+
+{% if params.value is string %}
+  {{ digitalmarketplaceSummaryContentText({
+    "text": params.value
+  }) }}
+{% else %}
+  {{ digitalmarketplaceSummaryContentList({
+    "items": params.value
+  }) }}
+{% endif %}
+{% endmacro %}
