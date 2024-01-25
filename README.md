@@ -32,8 +32,8 @@ app.jinja_loader = ChoiceLoader(
         PackageLoader("app"),
         PrefixLoader(
           {
-            "govuk_frontend_jinja": PackageLoader("govuk_frontend_jinja")
-            "ccs_digitalmarketplace_frontend_jinja": PackageLoader("ccs_digitalmarketplace_frontend_jinja"),
+            "govuk_frontend_jinja": PackageLoader("govuk_frontend_jinja"),
+            "digitalmarketplace_frontend_jinja": PackageLoader("digitalmarketplace_frontend_jinja"),
           }
         ),
     ]
@@ -45,7 +45,7 @@ app.jinja_loader = ChoiceLoader(
 To use a component in your project templates you must import and call the component macro and pass the relevant options, for example:
 
 ```html
-{%- from 'ccs_digitalmarketplace_frontend_jinja/components/alert/macro.html' import digitalmarketplaceAlert -%}
+{%- from 'digitalmarketplace_frontend_jinja/components/alert/macro.html' import digitalmarketplaceAlert -%}
 
 {{ digitalmarketplaceAlert({
     "titleText": "Your application is complete",
