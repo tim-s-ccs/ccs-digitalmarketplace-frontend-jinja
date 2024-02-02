@@ -2,7 +2,11 @@
 
 Records breaking changes from major version bumps.
 
-## Unreleased
+## Release 1.1.0rc1
+
+Upgrade Flask to v2 and, therefore, Jinja to v3
+
+## Release 1.0.0
 
 🆕 New features:
 
