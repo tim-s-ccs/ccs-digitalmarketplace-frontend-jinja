@@ -51,15 +51,15 @@ def create_app():
 
     main = Blueprint('main', __name__)
 
-    @main.route("/", methods=["GET"])
-    def index() -> Any:
+    @main.get("/")
+    def index() -> str:
         return "Hello there"
 
     app.register_blueprint(main)
 
-    @app.route("/component/<string:component>", methods=["POST"])
+    @app.post("/component/<string:component>")
     def component(component: str) -> Any:
-        data = request.json
+        data = request.get_json()
         # Render the component using the data provided
         # component is the hyphenated component name e.g. character-count
         # data['macro_name'] is the camelcased name e.g. CharacterCount
@@ -72,15 +72,15 @@ def create_app():
             """
         )
 
-    @app.route("/layout/<string:layout>", methods=["POST"])
+    @app.post("/layout/<string:layout>")
     def layout(layout: str) -> Any:
-        data = request.json
+        data = request.get_json()
         # Render the layout template using the data provided
         return render_template(f"digitalmarketplace_frontend_jinja/layouts/{layout}.html", **data.get('params', {}))
 
-    @app.route("/error/<string:error>", methods=["POST"])
+    @app.post("/error/<string:error>")
     def error_page(error: str) -> Any:
-        data = request.json
+        data = request.get_json()
         # Render the error template using the data provided
         return render_template(f"digitalmarketplace_frontend_jinja/errors/{error}.html", **data.get('params', {}))
 

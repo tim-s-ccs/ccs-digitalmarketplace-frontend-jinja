@@ -30,9 +30,9 @@ setup(
     package_data={'digitalmarketplace_frontend_jinja': components},
     include_package_data=True,
     install_requires=[
-        'jinja2<3',
+        'jinja2>3',
         'govuk-frontend-jinja>=2.7.0',
-        'ccs-digitalmarketplace-utils',
+        'ccs-digitalmarketplace-utils>=65.0.0rc1',
     ],
     python_requires="~=3.9",
 )
