@@ -27,10 +27,10 @@ ccs-digitalmarketplace-apiclient==25.0.0
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==64.1.0
+ccs-digitalmarketplace-utils==65.0.0rc2
     # via
     #   -r requirements.txt
-    #   sanitized-package
+    #   ccs-digitalmarketplace-frontend-jinja
 certifi==2023.11.17
     # via
     #   -r requirements.txt
@@ -67,7 +67,7 @@ exceptiongroup==1.2.0
     # via pytest
 flake8==7.0.0
     # via -r requirements-dev.in
-flask==1.1.4
+flask==2.0.3
     # via
     #   -r requirements-dev.in
     #   -r requirements.txt
@@ -103,24 +103,24 @@ govuk-country-register==0.5.0
 govuk-frontend-jinja==2.7.0
     # via
     #   -r requirements.txt
-    #   sanitized-package
+    #   ccs-digitalmarketplace-frontend-jinja
 idna==3.6
     # via
     #   -r requirements.txt
     #   requests
 iniconfig==2.0.0
     # via pytest
-itsdangerous==1.1.0
+itsdangerous==2.1.2
     # via
     #   -r requirements.txt
     #   flask
     #   flask-wtf
-jinja2==2.11.3
+jinja2==3.1.3
     # via
     #   -r requirements.txt
+    #   ccs-digitalmarketplace-frontend-jinja
     #   flask
     #   govuk-frontend-jinja
-    #   sanitized-package
 jmespath==1.0.1
     # via
     #   -r requirements.txt
@@ -132,10 +132,9 @@ mailchimp3==3.0.21
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
-markupsafe==1.1.1
+markupsafe==2.1.4
     # via
     #   -r requirements.txt
-    #   ccs-digitalmarketplace-utils
     #   jinja2
     #   wtforms
 mccabe==0.7.0
@@ -205,10 +204,6 @@ tomli==2.0.1
     # via
     #   mypy
     #   pytest
-types-jinja2==2.11.9
-    # via -r requirements-dev.in
-types-markupsafe==1.1.10
-    # via types-jinja2
 typing-extensions==4.9.0
     # via mypy
 unicodecsv==0.14.1
@@ -220,9 +215,10 @@ urllib3==1.26.18
     #   -r requirements.txt
     #   botocore
     #   requests
-werkzeug==1.0.1
+werkzeug==2.0.3
     # via
     #   -r requirements.txt
+    #   ccs-digitalmarketplace-utils
     #   flask
     #   flask-login
 workdays==1.4
