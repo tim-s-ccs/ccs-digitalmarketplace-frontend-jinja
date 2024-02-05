@@ -2,7 +2,7 @@
 
 Records breaking changes from major version bumps.
 
-## Unreleased
+## 1.0.0
 
 🆕 New features:
 
