@@ -55,7 +55,7 @@ fleep==1.0.1
     # via ccs-digitalmarketplace-utils
 govuk-country-register==0.5.0
     # via ccs-digitalmarketplace-utils
-govuk-frontend-jinja==2.7.0
+govuk-frontend-jinja==3.0.0
     # via sanitized-package
 idna==3.6
     # via requests

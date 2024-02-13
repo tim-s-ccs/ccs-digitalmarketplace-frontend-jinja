@@ -100,7 +100,7 @@ govuk-country-register==0.5.0
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
-govuk-frontend-jinja==2.7.0
+govuk-frontend-jinja==3.0.0
     # via
     #   -r requirements.txt
     #   sanitized-package
