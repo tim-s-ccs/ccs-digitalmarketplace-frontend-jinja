@@ -1,44 +1,36 @@
-name: Run tests
+name: Test
 on: [pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9]
-
+        python-version: [ 3.9 ]
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'npm'
 
-      - name: Setup Python cache
-        uses: actions/cache@v4
-        with:
-          path: venv
-          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/requirements*.txt') }}
+    - name: Setup python (${{ matrix.python-version }})
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
 
-      - name: Setup Node cache
-        uses: actions/cache@v4
-        id: node-cache
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+    - name: Install developer tools
+      run: make bootstrap
 
-      - name: Install Node version
-        shell: bash -l {0}
-        run: nvm install
+    - name: Install Node dependencies
+      run:  invoke npm-install
+      if: steps.node-cache.outputs.cache-hit != 'true'
 
-      - name: Install developer tools
-        run: make bootstrap
+    - name: Install dependencies
+      run: invoke requirements-dev
+      if: steps.python-cache.outputs.cache-hit != 'true'
 
-      - name: Install dependencies
-        run: invoke requirements-dev
-
-      - name: Run tests
-        run: invoke test
+    - name: Run tests
+      run: invoke test
