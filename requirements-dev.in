@@ -5,5 +5,3 @@ mypy
 pytest
 lxml
 flask
-
-types-Jinja2
