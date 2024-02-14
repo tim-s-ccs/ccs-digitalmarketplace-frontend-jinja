@@ -58,7 +58,7 @@ def test_render_component(client, component_name, macro_name, fixture_name, fixt
     ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
 
 
-# Debugging test case for testing one component
+# # Debugging test case for testing one component
 # @pytest.mark.parametrize("macro_name, fixture_name, fixture_options, fixture_html", component_fixtures(''))
 # def test_component(client, macro_name, fixture_name, fixture_options, fixture_html):
 #     component_name = ''
@@ -76,7 +76,7 @@ def test_render_component(client, component_name, macro_name, fixture_name, fixt
 #     ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
 
 
-# Debugging test case for testing one component example
+# # Debugging test case for testing one component example
 # def test_individual_component(client):
 #     component_name = ''
 #     macro_name = component_name_to_macro_name(component_name)
