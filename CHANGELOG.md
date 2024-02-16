@@ -2,7 +2,16 @@
 
 Records breaking changes from major version bumps.
 
-## Release 1.1.0
+## 1.2.0
+
+Allow for use with all currently maintained Python versions:
+- 3.9
+- 3.10
+- 3.11
+
+Note, because ccs-digitalmarketplace-utils does not support 3.12 yet, neither can we.
+
+## 1.1.0
 
 Upgrade Flask to v2 and, therefore, Jinja to v3
 
