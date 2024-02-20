@@ -2,6 +2,10 @@
 
 Records breaking changes from major version bumps.
 
+## 1.3.0rc1
+
+Upgrade Flask to v2.3
+
 ## 1.2.0
 
 Allow for use with all currently maintained Python versions:
