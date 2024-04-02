@@ -18,7 +18,7 @@ cachelib==0.10.2
     # via flask-session
 ccs-digitalmarketplace-apiclient==25.0.0
     # via ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==65.2.0
+ccs-digitalmarketplace-utils==65.3.1
     # via sanitized-package
 certifi==2023.11.17
     # via requests
