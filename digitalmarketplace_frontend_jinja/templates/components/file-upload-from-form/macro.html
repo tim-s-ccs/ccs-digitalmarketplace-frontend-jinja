@@ -7,13 +7,14 @@
 {{ govukFileUpload({
   "label": {
     "text": params.form.question,
-    "classes": params.label.classes if params.label and params.label.classes else "govuk-label--m",
+    "classes": params.label.classes if params.label,
     "isPageHeading": params.label.isPageHeading if params.label
   },
   "name": name,
   "id": "input-" + name,
   "value": params.form.data,
   "classes": params.classes,
+  "attributes": params.attributes,
   "hint": {
     "html": params.form.hint
   } if params.form.hint,
