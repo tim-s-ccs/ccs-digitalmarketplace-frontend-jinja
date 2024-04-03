@@ -1,48 +1,44 @@
 {% macro digitalmarketplaceRadiosFromForm(params) %}
 {%- from 'govuk_frontend_jinja/components/radios/macro.html' import govukRadios -%}
 
-{% set errorMessage = params.form.errors[0] if params.form.errors %}
 {% set name = params.form.name %}
 {% set items = params['items'] if 'items' in params else [] %}
-{% set legend = params.fieldset.legend if params.fieldset and params.fieldset.legend else {} %}
+
 
 {% if 'items' not in params %}
-  {% for option in params.form.options %}
-    {% set item = {
-      "value": option["value"],
-      "text": option["label"]
-    } %}
+  {% for item in params.form.options %}
+    {% set _ = item.__setitem__("text", item["label"]) %}
 
-    {% if params.form.data == option["value"] %}
-      {% set _item = item.__setitem__("checked", true) %}
+    {% if params.form.data == item["value"] %}
+      {% set _ = item.__setitem__("checked", true) %}
     {% endif %}
 
-    {% if "description" in option %}
-      {% set _item = item.__setitem__("hint", { 'text': option["description"] }) %}
+    {% if "description" in item %}
+      {% set _ = item.__setitem__("hint", { 'text': item["description"] }) %}
     {% endif %}
 
-    {% set _items = items.append(item) %}
+    {% set _ = items.append(item) %}
   {% endfor %}
+
+  {% set _ = params.__setitem__("items", items) %}
 {% endif %}
 
-{{ govukRadios({
-  "fieldset": {
-    "legend": {
-      "text": params.form.question,
-      "classes": legend.classes if legend.classes else "govuk-fieldset__legend--m",
-      "isPageHeading": legend.isPageHeading
-    }
-  },
-  "name": name,
-  "idPrefix": "input-" + name,
-  "items": items,
-  "classes": params.classes,
-  "attributes": params.attributes,
-  "hint": {
-    "text": params.form.hint
-  } if params.form.hint,
-  "errorMessage": {
-    "text": errorMessage
-  } if errorMessage
-}) }}
+{% if "fieldset" not in params %}
+  {% set _ = params.__setitem__("fieldset", {}) %}
+{% endif %}
+{% if "legend" not in params.fieldset %}
+  {% set _ = params.fieldset.__setitem__("legend", {}) %}
+{% endif %}
+{% set _ = params.fieldset.legend.__setitem__("text", params.form.question) %}
+{% if not params.fieldset.legend.classes %}
+  {% set _ = params.fieldset.legend.__setitem__("classes", "govuk-fieldset__legend--m") %}
+{% endif %}
+
+{% set _ = params.__setitem__("name", name) %}
+{% set _ = params.__setitem__("idPrefix", "input-" + name) %}
+
+{% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint %}
+{% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
+
+{{ govukRadios(params) }}
 {% endmacro %}
