@@ -1,25 +1,19 @@
 {% macro digitalmarketplaceFileUploadFromForm(params) %}
 {%- from 'govuk_frontend_jinja/components/file-upload/macro.html' import govukFileUpload -%}
 
-{% set errorMessage = params.form.errors[0] if params.form.errors %}
 {% set name = params.form.name %}
 
-{{ govukFileUpload({
-  "label": {
-    "text": params.form.question,
-    "classes": params.label.classes if params.label,
-    "isPageHeading": params.label.isPageHeading if params.label
-  },
-  "name": name,
-  "id": "input-" + name,
-  "value": params.form.data,
-  "classes": params.classes,
-  "attributes": params.attributes,
-  "hint": {
-    "html": params.form.hint
-  } if params.form.hint,
-  "errorMessage": {
-    "text": errorMessage
-  } if errorMessage
-}) }}
+{% if "label" not in params %}
+  {% set _ = params.__setitem__("label", {}) %}
+{% endif %}
+{% set _ = params.label.__setitem__("text", params.form.question) %}
+
+{% set _ = params.__setitem__("name", name) %}
+{% set _ = params.__setitem__("id", "input-" + name) %}
+
+{% set _ = params.__setitem__("value", params.form.data) if params.form.data %}
+{% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint %}
+{% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
+
+{{ govukFileUpload(params) }}
 {% endmacro %}

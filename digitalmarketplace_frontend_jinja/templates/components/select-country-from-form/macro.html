@@ -1,7 +1,6 @@
 {% macro digitalmarketplaceSelectCountryFromForm(params) %}
 {%- from 'govuk_frontend_jinja/components/select/macro.html' import govukSelect -%}
 
-{% set errorMessage = params.form.errors[0] if params.form.errors %}
 {% set name = params.form.name %}
 
 {% set countries = [] %}
@@ -13,22 +12,14 @@
   {% set _countries = countries.append({"value": country[1], "text": country[0], "selected": params.form.data == country[1] }) %}
 {% endfor %}
 
-{{ govukSelect({
-  "id": "input-" + name,
-  "name": name,
-  "label": {
-    "text": "Country",
-    "classes": "govuk-label--m"
-  },
-  "classes": 'dm-select-country govuk-input--width-10',
-  "items": countries,
-  "attributes": {
-    'data-module': 'dm-select-country',
-    'data-assets-path': params.assetsPath
-  },
-  "errorMessage": {
-    "text": errorMessage
-  } if errorMessage,
-  "value": params.form.data if params.form.data
-}) }}
+{% set _ = params.__setitem__("label", { "text": "Country", "classes": "govuk-label--m" }) %}
+{% set _ = params.__setitem__("name", name) %}
+{% set _ = params.__setitem__("id", "input-" + name) %}
+{% set _ = params.__setitem__("classes", "dm-select-country govuk-input--width-10") %}
+{% set _ = params.__setitem__("attributes", { "data-module": "dm-select-country", "data-assets-path": params.assetsPath }) %}
+{% set _ = params.__setitem__("items", countries) %}
+
+{% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
+
+{{ govukSelect(params) }}
 {% endmacro %}
