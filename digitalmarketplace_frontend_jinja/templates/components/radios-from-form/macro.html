@@ -6,16 +6,23 @@
 
 
 {% if 'items' not in params %}
-  {% for item in params.form.options %}
-    {% set _ = item.__setitem__("text", item["label"]) %}
+  {% for option in params.form.options %}
+    {% set item = {
+      "value": option["value"],
+      "text": option["label"]
+    } %}
 
-    {% if params.form.data == item["value"] %}
+    {% if params.form.data == option["value"] %}
       {% set _ = item.__setitem__("checked", true) %}
     {% endif %}
 
-    {% if "description" in item %}
-      {% set _ = item.__setitem__("hint", { 'text': item["description"] }) %}
+    {% if "description" in option %}
+      {% set _ = item.__setitem__("hint", { 'text': option["description"] }) %}
     {% endif %}
+
+    {% for attribute in ["id", "divider", "conditional", "disabled", "attributes"] %}
+      {% set _ = item.__setitem__(attribute, option[attribute]) if attribute in option %}
+    {% endfor %}
 
     {% set _ = items.append(item) %}
   {% endfor %}
