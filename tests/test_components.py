@@ -58,6 +58,23 @@ def test_render_component(client, component_name, macro_name, fixture_name, fixt
     ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
 
 
+def test_all_jinja_templates_exist():
+    excluded_components = ['follow-up-question-example']
+
+    jinja_components = [component for component in get_components()]
+
+    nunjucks_components = []
+
+    paths = glob.glob(f'{DM_COMPONENTS_NODE_DIR}/*/macro.njk')
+    for path in paths:
+        component_name = path.split('/')[4]
+
+        if component_name not in excluded_components:
+            nunjucks_components.append(component_name)
+
+    assert jinja_components == nunjucks_components
+
+
 # # Debugging test case for testing one component
 # @pytest.mark.parametrize("macro_name, fixture_name, fixture_options, fixture_html", component_fixtures(''))
 # def test_component(client, macro_name, fixture_name, fixture_options, fixture_html):
