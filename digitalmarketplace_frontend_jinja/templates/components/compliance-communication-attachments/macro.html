@@ -1,0 +1,62 @@
+{% macro digitalmarketplaceComplianceCommunicationAttachments(params) %}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+
+{%- from "digitalmarketplace_frontend_jinja/components/compliance-communication-attachment-row/macro.html" import digitalmarketplaceComplianceCommunicationAttachmentRow -%}
+
+{% call govukFieldset({
+  "legend": {
+    "text": "Add an attachment",
+    "classes": "govuk-fieldset__legend--m"
+  },
+  "attributes": {
+    "data-module": "dm-compliance-communication__attachments"
+  }
+}) %}
+  <p class="govuk-caption-m">
+    You can add up to 3 attachments
+  </p>
+
+  <div class="govuk-visually-hidden dm-compliance-communication__attachments-item-template">
+    {{ digitalmarketplaceComplianceCommunicationAttachmentRow({
+      "form": {
+        "attachment_name_99": {
+          "name": "attachment_name_99",
+          "question": params.form.attachment_name_0.question,
+          "hint": params.form.attachment_name_0.hint
+        },
+        "attachment_file_99": {
+          "name": "attachment_file_99",
+          "question": params.form.attachment_file_0.question,
+          "hint": params.form.attachment_file_0.hint
+        },
+        "attachment_required_99": {
+          "name": "attachment_required_99",
+          "question": params.form.attachment_required_0.question,
+          "data": None
+        }
+      },
+      "index": 99,
+      "template": True
+    }) }}
+  </div>
+
+  <div class="dm-compliance-communication__attachments-items">
+    {% for index in range(3) %}
+      {{ digitalmarketplaceComplianceCommunicationAttachmentRow({
+        "form": params.form,
+        "index": index
+      }) }}
+    {% endfor %}
+  </div>
+
+  {{ govukButton({
+    "html": 'Add attachment (<span class="dm-compliance-communication__attachments__js-remaining-counter">0</span> remaining)',
+    "classes": "govuk-button--secondary dm-compliance-communication__attachments-add govuk-visually-hidden",
+    "type": "button",
+    "attributes": {
+      "tabindex": "-1"
+    }
+  }) }}
+{% endcall %}
+{% endmacro %}
