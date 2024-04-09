@@ -1,0 +1,70 @@
+{% macro digitalmarketplaceComplianceCommunicationAttachmentRow(params) %}
+{%- from 'govuk_frontend_jinja/components/checkboxes/macro.html' import govukCheckboxes -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+
+{%- from "digitalmarketplace_frontend_jinja/components/input-from-form/macro.html" import digitalmarketplaceInputFromForm -%}
+{%- from "digitalmarketplace_frontend_jinja/components/file-upload-from-form/macro.html" import digitalmarketplaceFileUploadFromForm -%}
+{%- from "digitalmarketplace_frontend_jinja/components/checkboxes-from-form/macro.html" import digitalmarketplaceCheckboxesFromForm -%}
+
+{% call govukFieldset({
+  "legend": {
+    "html": 'Attachment <span class="dm-compliance-communication__attachments-item-legend-counter">{}</span>'.format(params.index + 1),
+    "classes": "govuk-fieldset__legend--m"
+  },
+  "classes": "dm-compliance-communication__attachments-item"
+}) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      {{ digitalmarketplaceInputFromForm({
+        "form": params.form["attachment_name_{}".format(params.index)],
+        "label": {
+          "classes": " "
+        },
+        "classes": "dm-compliance-communication__attachments-item-name",
+        "attributes": {
+          "tabindex": "-1"
+        } if params.template
+      }) }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ digitalmarketplaceFileUploadFromForm({
+        "form": params.form["attachment_file_{}".format(params.index)],
+        "classes": "dm-compliance-communication__attachments-item-file",
+        "attributes": {
+          "tabindex": "-1"
+        } if params.template
+      }) }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ govukButton({
+        "html": 'Remove attachment <span class="dm-compliance-communication__attachments-item-remove-counter">{}</span>'.format(params.index + 1),
+        "classes": "govuk-button--secondary dm-compliance-communication__attachments-item-remove govuk-visually-hidden",
+        "type": "button",
+        "attributes": {
+          "tabindex": "-1"
+        }
+      }) }}
+      {{ digitalmarketplaceCheckboxesFromForm({
+        "form": params.form["attachment_required_{}".format(params.index)],
+        "fieldset": {
+          "legend": {
+            "classes": " "
+          },
+          "classes": "dm-compliance-communication__attachments-item-required"
+        },
+        "items": [
+          {
+            "text": params.form["attachment_required_{}".format(params.index)].question,
+            "value": true,
+            "checked": params.form["attachment_required_{}".format(params.index)].data == True,
+            "attributes": {
+              "tabindex": "-1"
+            } if params.template
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+{% endcall %}
+{% endmacro %}
