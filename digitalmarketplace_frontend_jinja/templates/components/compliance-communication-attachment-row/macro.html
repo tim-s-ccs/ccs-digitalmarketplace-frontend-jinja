@@ -57,7 +57,7 @@
           {
             "text": params.form["attachment_required_{}".format(params.index)].question,
             "value": true,
-            "checked": params.form["attachment_required_{}".format(params.index)].data == True,
+            "checked": params.form["attachment_required_{}".format(params.index)].data | lower == 'true',
             "attributes": {
               "tabindex": "-1"
             } if params.template
