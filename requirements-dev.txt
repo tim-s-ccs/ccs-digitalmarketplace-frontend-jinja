@@ -27,7 +27,7 @@ ccs-digitalmarketplace-apiclient==25.0.0
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==65.6.0
+ccs-digitalmarketplace-utils==65.8.0
     # via
     #   -r requirements.txt
     #   sanitized-package
