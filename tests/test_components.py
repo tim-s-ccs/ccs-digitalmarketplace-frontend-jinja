@@ -68,6 +68,13 @@ def html_to_one_line(html: str):
     return html.strip().replace("\n", '').replace(" ", '').lower()
 
 
+def assert_generated_html_matches_fixture(response, component_name, fixture_name, fixture_html):
+    assert response.status_code == 200
+    assert (
+        html_to_one_line(response.get_data().decode("utf-8")) == html_to_one_line(fixture_html)
+    ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
+
+
 @pytest.fixture(scope="session")
 def component_fixtures():
     return get_component_fixtures()
@@ -89,10 +96,12 @@ def test_render_component(client, component_fixtures, component_name, fixture_na
             'params': fixture_options
         })
     )
-    assert response.status_code == 200
-    assert (
-        html_to_one_line(response.get_data().decode("utf-8")) == html_to_one_line(fixture_html)
-    ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
+    assert_generated_html_matches_fixture(
+        response,
+        component_name,
+        fixture_name,
+        fixture_html
+    )
 
 
 def test_all_jinja_templates_exist():
@@ -119,10 +128,12 @@ def test_all_jinja_templates_exist():
 #             'params': fixture_options
 #         })
 #     )
-#     assert response.status_code == 200
-#     assert (
-#         html_to_one_line(response.get_data().decode("utf-8")) == html_to_one_line(fixture_html)
-#     ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
+#     assert_generated_html_matches_fixture(
+#        response,
+#        component_name,
+#        fixture_name,
+#        fixture_html
+#    )
 
 
 # # Debugging test case for testing one component example
@@ -144,6 +155,9 @@ def test_all_jinja_templates_exist():
 #     print('---TEST---')
 #     print(html_to_one_line(fixture_html))
 #     print(html_to_one_line(response.get_data().decode("utf-8")))
-#     assert (
-#         html_to_one_line(response.get_data().decode("utf-8")) == html_to_one_line(fixture_html)
-#     ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
+#     assert_generated_html_matches_fixture(
+#         response,
+#         component_name,
+#         fixture_name,
+#         fixture_html
+#     )

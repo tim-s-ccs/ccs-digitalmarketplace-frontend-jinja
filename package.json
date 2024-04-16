@@ -5,6 +5,6 @@
   "author": "CCS",
   "license": "MIT",
   "devDependencies": {
-    "ccs-digitalmarketplace-govuk-frontend": "^5.5.0"
+    "ccs-digitalmarketplace-govuk-frontend": "^6.0.0rc2"
   }
 }
