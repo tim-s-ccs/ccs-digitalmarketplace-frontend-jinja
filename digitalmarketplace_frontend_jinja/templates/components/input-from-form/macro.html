@@ -15,7 +15,7 @@
 {% set _ = params.__setitem__("id", "input-" + name) %}
 
 {% set _ = params.__setitem__("value", params.form.data) if params.form.data %}
-{% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint %}
+{% set _ = params.__setitem__("hint", { "text": params.form.hint }) if params.form.hint and "hint" not in params %}
 {% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
 
 {{ govukInput(params) }}
