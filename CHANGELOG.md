@@ -2,6 +2,10 @@
 
 Records breaking changes from major version bumps.
 
+## 2.0.0rc1
+
+Upgrade GOV.UK Frontend Jinja to v3.0 (GOV.UK Frontend 5.1)
+
 ## 1.2.0
 
 Allow for use with all currently maintained Python versions:
@@ -15,7 +19,7 @@ Note, because ccs-digitalmarketplace-utils does not support 3.12 yet, neither ca
 
 Upgrade Flask to v2 and, therefore, Jinja to v3
 
-Upgrade GOV.UK Frontend Jinja to v2.8 (Node 4.8)
+Upgrade GOV.UK Frontend Jinja to v2.8 (GOV.UK Frontend 4.8)
 
 ## 1.0.0
 
