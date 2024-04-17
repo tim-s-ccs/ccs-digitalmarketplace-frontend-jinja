@@ -1,8 +1,8 @@
 {% macro digitalmarketplaceQuestionPricing(params) %}
 {%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
 {%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
-{%- from "govuk_frontend_jinja/components/select/macro.html" import govukSelect -%}
 {%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "digitalmarketplace_frontend_jinja/components/select/macro.html" import govukSelect -%}
 
 {% set name = params.question.id %}
 {% set errorMessage = params.errors[name] if params.errors %}
