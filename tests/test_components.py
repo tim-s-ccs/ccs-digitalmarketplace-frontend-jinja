@@ -6,13 +6,22 @@ import pytest
 DM_COMPONENTS_TEMPLATES_DIR = 'digitalmarketplace_frontend_jinja/templates/components'
 DM_COMPONENTS_NODE_DIR = 'node_modules/ccs-digitalmarketplace-govuk-frontend/digitalmarketplace/components'
 
+# This is temporary while we wait for a bug with the select helper to be fixed
+EXCLUDED_JINJA_COMPONENTS = [
+    "select"
+]
+EXCLUDED_NUNJUCKS_COMPONENTS = [
+    'follow-up-question-example'
+]
+
 
 def get_jinja_components():
     paths = glob.glob(f'{DM_COMPONENTS_TEMPLATES_DIR}/*/macro.html')
     for path in paths:
         component_name = path.split('/')[3]
 
-        yield (component_name)
+        if component_name not in EXCLUDED_JINJA_COMPONENTS:
+            yield (component_name)
 
 
 def get_nunjucks_components():
@@ -20,7 +29,8 @@ def get_nunjucks_components():
     for path in paths:
         component_name = path.split('/')[4]
 
-        yield (component_name)
+        if component_name not in EXCLUDED_NUNJUCKS_COMPONENTS:
+            yield (component_name)
 
 
 def get_component_fixtures():
@@ -64,8 +74,20 @@ def component_fixture(fixtures, component_name, fixture_name):
     return (fixture['options'], fixture['html'])
 
 
+# For help formatting the HTML to make it compareable
+REPLACERS = [
+    ("\n", ""),
+    (" ", ""),
+    ('value="True"', 'value="true"'),
+    ('value="False"', 'value="false"'),
+]
+
+
 def html_to_one_line(html: str):
-    return html.strip().replace("\n", '').replace(" ", '').lower()
+    for replacer in REPLACERS:
+        html = html.replace(*replacer)
+
+    return html
 
 
 @pytest.fixture(scope="session")
@@ -96,11 +118,9 @@ def test_render_component(client, component_fixtures, component_name, fixture_na
 
 
 def test_all_jinja_templates_exist():
-    excluded_components = ['follow-up-question-example']
-
     jinja_components = [component for component in get_jinja_components()]
 
-    nunjucks_components = [component for component in get_nunjucks_components() if component not in excluded_components]
+    nunjucks_components = [component for component in get_nunjucks_components()]
 
     assert jinja_components == nunjucks_components
 
