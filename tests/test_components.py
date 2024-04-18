@@ -1,7 +1,11 @@
 import glob
 import json
+import re
 
 import pytest
+from lxml import html
+from xmldiff.main import diff_trees
+
 
 DM_COMPONENTS_TEMPLATES_DIR = 'digitalmarketplace_frontend_jinja/templates/components'
 DM_COMPONENTS_NODE_DIR = 'node_modules/ccs-digitalmarketplace-govuk-frontend/digitalmarketplace/components'
@@ -75,16 +79,22 @@ def component_fixture(fixtures, component_name, fixture_name):
 
 
 # For help formatting the HTML to make it compareable
-REPLACERS = [
-    ("\n", ""),
-    (" ", ""),
+REGEX_REPLACERS = [
+    (r"\s{2,}", ""),
+    (r"\n", ""),
+]
+
+STRING_REPLACERS = [
     ('value="True"', 'value="true"'),
     ('value="False"', 'value="false"'),
 ]
 
 
 def html_to_one_line(html: str):
-    for replacer in REPLACERS:
+    for replacer in REGEX_REPLACERS:
+        html = re.sub(*replacer, html)
+
+    for replacer in STRING_REPLACERS:
         html = html.replace(*replacer)
 
     return html
@@ -92,9 +102,22 @@ def html_to_one_line(html: str):
 
 def assert_generated_html_matches_fixture(response, component_name, fixture_name, fixture_html):
     assert response.status_code == 200
-    assert (
-        html_to_one_line(response.get_data().decode("utf-8")) == html_to_one_line(fixture_html)
-    ), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
+
+    fixture_html_string = html_to_one_line(fixture_html)
+    macro_html_string = html_to_one_line(response.get_data().decode("utf-8"))
+
+    if not fixture_html_string or not macro_html_string:
+        diff = fixture_html_string != macro_html_string
+    else:
+        fixture_document = html.fromstring(fixture_html_string)
+        macro_document = html.fromstring(macro_html_string)
+
+        diff = diff_trees(
+            fixture_document,
+            macro_document
+        )
+
+    assert (not diff), f"Did not match for '{component_name}' component with example: '{fixture_name}'"
 
 
 @pytest.fixture(scope="session")

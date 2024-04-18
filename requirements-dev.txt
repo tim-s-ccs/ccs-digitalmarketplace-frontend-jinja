@@ -127,7 +127,9 @@ jmespath==1.0.1
     #   boto3
     #   botocore
 lxml==5.2.1
-    # via -r requirements-dev.in
+    # via
+    #   -r requirements-dev.in
+    #   xmldiff
 mailchimp3==3.0.21
     # via
     #   -r requirements.txt
@@ -229,3 +231,8 @@ wtforms==3.1.2
     # via
     #   -r requirements.txt
     #   flask-wtf
+xmldiff==2.6.3
+    # via -r requirements-dev.in
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
