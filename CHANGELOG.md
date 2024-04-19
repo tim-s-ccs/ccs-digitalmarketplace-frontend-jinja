@@ -2,7 +2,7 @@
 
 Records breaking changes from major version bumps.
 
-## 2.1.0
+## 2.1.0rc1
 
 Upgrade GOV.UK Frontend Jinja to v3.1 (GOV.UK Frontend 5.3.1)
 
