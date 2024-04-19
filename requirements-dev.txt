@@ -100,7 +100,7 @@ govuk-country-register==0.5.0
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
-govuk-frontend-jinja==3.0.0
+govuk-frontend-jinja @ git+https://github.com/tim-s-ccs/govuk-frontend-jinja@3.1.0rc1
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-frontend-jinja
