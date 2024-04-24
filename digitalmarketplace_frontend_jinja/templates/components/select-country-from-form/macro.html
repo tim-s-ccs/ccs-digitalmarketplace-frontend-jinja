@@ -16,7 +16,7 @@
 {% set _ = params.__setitem__("name", name) %}
 {% set _ = params.__setitem__("id", "input-" + name) %}
 {% set _ = params.__setitem__("classes", "dm-select-country govuk-input--width-10") %}
-{% set _ = params.__setitem__("attributes", { "data-module": "dm-select-country", "data-assets-path": params.assetsPath }) %}
+{% set _ = params.__setitem__("attributes", { "data-module": "dm-select-country" }) %}
 {% set _ = params.__setitem__("items", countries) %}
 
 {% set _ = params.__setitem__("errorMessage", { "text": params.form.errors[0] }) if params.form.errors %}
