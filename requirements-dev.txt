@@ -155,7 +155,7 @@ odfpy==1.4.1
     #   ccs-digitalmarketplace-utils
 packaging==23.2
     # via pytest
-pluggy==1.4.0
+pluggy==1.5.0
     # via pytest
 pycodestyle==2.11.1
     # via flake8
@@ -169,7 +169,7 @@ pyjwt==2.8.0
     # via
     #   -r requirements.txt
     #   notifications-python-client
-pytest==8.1.1
+pytest==8.2.0
     # via -r requirements-dev.in
 python-dateutil==2.8.2
     # via
