@@ -55,7 +55,7 @@ contextlib2==21.6.0
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
-cryptography==41.0.7
+cryptography==42.0.6
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
