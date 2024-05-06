@@ -217,7 +217,7 @@ urllib3==1.26.18
     #   -r requirements.txt
     #   botocore
     #   requests
-werkzeug==2.0.3
+werkzeug==3.0.3
     # via
     #   -r requirements.txt
     #   ccs-digitalmarketplace-utils
