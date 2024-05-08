@@ -34,5 +34,5 @@ setup(
         'ccs-govuk-frontend-jinja>=1,<2',
         'ccs-digitalmarketplace-utils>=65.0.0',
     ],
-    python_requires=">=3.9,<3.12",
+    python_requires=">=3.9,<3.13",
 )

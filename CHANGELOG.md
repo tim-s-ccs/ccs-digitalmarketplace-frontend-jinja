@@ -2,6 +2,16 @@
 
 Records breaking changes from major version bumps.
 
+## 2.3.0
+
+Add support for Python 3.12
+
+
+## 2.2.0
+
+Upgrade Digital Marketplace GOV.UK Frontend to v6.2
+
+
 ## 2.1.0
 
 Use CCS GOV.UK Frontend Jinja to v1.0 (GOV.UK Frontend 5.3.1)
