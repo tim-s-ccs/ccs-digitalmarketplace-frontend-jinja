@@ -2,6 +2,10 @@
 
 Records breaking changes from major version bumps.
 
+## 2.4.0
+
+Update flask support to v2.1
+
 ## 2.3.0
 
 Add support for Python 3.12

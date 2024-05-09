@@ -32,7 +32,7 @@ setup(
     install_requires=[
         'jinja2>3',
         'ccs-govuk-frontend-jinja>=1,<2',
-        'ccs-digitalmarketplace-utils>=65.0.0',
+        'ccs-digitalmarketplace-utils>=66.0.0rc2',
     ],
     python_requires=">=3.9,<3.13",
 )
