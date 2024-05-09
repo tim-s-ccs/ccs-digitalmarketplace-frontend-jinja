@@ -2,7 +2,7 @@
 
 Records breaking changes from major version bumps.
 
-## 2.4.0
+## 2.4.0rc1
 
 Update flask support to v2.1
 
