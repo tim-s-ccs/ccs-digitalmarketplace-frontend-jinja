@@ -2,7 +2,7 @@
 
 Records breaking changes from major version bumps.
 
-## 2.4.0
+## 2.4.0rc5
 
 Remove support for Python 3.9
 
