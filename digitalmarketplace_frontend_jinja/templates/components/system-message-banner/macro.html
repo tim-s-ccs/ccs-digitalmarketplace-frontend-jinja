@@ -1,0 +1,7 @@
+{% macro digitalmarketplaceSystemMessageBanner(params) %}
+{%- from 'govuk_frontend_jinja/components/notification-banner/macro.html' import govukNotificationBanner -%}
+
+{%- if params.show -%}
+  {{ govukNotificationBanner(params.data) }}
+{%- endif -%}
+{% endmacro %}

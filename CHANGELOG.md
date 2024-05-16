@@ -2,6 +2,23 @@
 
 Records breaking changes from major version bumps.
 
+## 2.5.0
+
+🆕 New features:
+
+  Add macros for the following components:
+
+  | Component name        | Macro name                              |
+  |-----------------------|-----------------------------------------|
+  | System message banner | `digitalmarketplaceSystemMessageBanner` |
+
+  Remove macros for the following components:
+
+  | Component name        | Macro name                              |
+  |-----------------------|-----------------------------------------|
+  | New framework banner  | `digitalmarketplaceNewFrameworkBanner`  |
+
+
 ## 2.4.0
 
 Remove support for Python 3.9
