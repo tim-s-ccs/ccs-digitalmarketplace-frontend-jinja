@@ -2,6 +2,11 @@
 
 Records breaking changes from major version bumps.
 
+## 2.6.0
+
+Upgrade Digital Marketplace GOV.UK Frontend to v6.4
+
+
 ## 2.5.0
 
 🆕 New features:
