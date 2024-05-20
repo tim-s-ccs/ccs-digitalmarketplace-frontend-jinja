@@ -31,7 +31,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'jinja2>3',
-        'ccs-govuk-frontend-jinja>=1,<2',
+        'ccs-govuk-frontend-jinja>=1.1,<2',
         'ccs-digitalmarketplace-utils>=66.0.1',
     ],
     python_requires=">=3.10,<3.13",

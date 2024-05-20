@@ -87,6 +87,9 @@ REGEX_REPLACERS = [
 STRING_REPLACERS = [
     ('value="True"', 'value="true"'),
     ('value="False"', 'value="false"'),
+    ("inputclass", "input class"),
+    ('spellcheck="True"', 'spellcheck="true"'),
+    ('spellcheck="False"', 'spellcheck="false"'),
 ]
 
 
