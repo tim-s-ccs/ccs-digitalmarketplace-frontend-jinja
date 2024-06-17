@@ -42,7 +42,7 @@ docopt==0.6.2
     # via notifications-python-client
 exceptiongroup==1.2.0
     # via pytest
-flake8==7.0.0
+flake8==7.1.0
     # via -r requirements-dev.in
 flask==2.3.3
     # via
@@ -106,7 +106,7 @@ packaging==23.2
     # via pytest
 pluggy==1.5.0
     # via pytest
-pycodestyle==2.11.1
+pycodestyle==2.12.0
     # via flake8
 pycparser==2.21
     # via cffi
