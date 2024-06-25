@@ -2,6 +2,13 @@
 
 Records breaking changes from major version bumps.
 
+## 2.7.0
+
+Make updates for change from Digital Marketplace GOV.UK Frontend to Digital Marketplace Frontend
+
+Use CCS GOV.UK Frontend Jinja to v1.2 (GOV.UK Frontend 5.4.0)
+
+
 ## 2.6.0
 
 Upgrade Digital Marketplace GOV.UK Frontend to v6.4
