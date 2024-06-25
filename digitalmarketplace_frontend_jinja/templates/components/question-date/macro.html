@@ -1,6 +1,6 @@
 {% macro digitalmarketplaceQuestionDate(params) %}
 {%- from "govuk_frontend_jinja/components/date-input/macro.html" import govukDateInput -%}
-{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
 {% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}

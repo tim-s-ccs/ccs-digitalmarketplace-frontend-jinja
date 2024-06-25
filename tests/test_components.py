@@ -8,15 +8,7 @@ from xmldiff.main import diff_trees
 
 
 DM_COMPONENTS_TEMPLATES_DIR = 'digitalmarketplace_frontend_jinja/templates/components'
-DM_COMPONENTS_NODE_DIR = 'node_modules/ccs-digitalmarketplace-govuk-frontend/digitalmarketplace/components'
-
-# This is temporary while we wait for a bug with the select helper to be fixed
-EXCLUDED_JINJA_COMPONENTS = [
-    "select"
-]
-EXCLUDED_NUNJUCKS_COMPONENTS = [
-    'follow-up-question-example'
-]
+DM_COMPONENTS_NODE_DIR = 'node_modules/digitalmarketplace-frontend/dist/digitalmarketplace/components'
 
 
 def get_jinja_components():
@@ -24,17 +16,15 @@ def get_jinja_components():
     for path in paths:
         component_name = path.split('/')[3]
 
-        if component_name not in EXCLUDED_JINJA_COMPONENTS:
-            yield (component_name)
+        yield (component_name)
 
 
 def get_nunjucks_components():
     paths = glob.glob(f'{DM_COMPONENTS_NODE_DIR}/*/macro.njk')
     for path in paths:
-        component_name = path.split('/')[4]
+        component_name = path.split('/')[5]
 
-        if component_name not in EXCLUDED_NUNJUCKS_COMPONENTS:
-            yield (component_name)
+        yield (component_name)
 
 
 def get_component_fixtures():
@@ -90,6 +80,7 @@ STRING_REPLACERS = [
     ("inputclass", "input class"),
     ('spellcheck="True"', 'spellcheck="true"'),
     ('spellcheck="False"', 'spellcheck="false"'),
+    ("checkeddata-target", "checked data-target"),
 ]
 
 
