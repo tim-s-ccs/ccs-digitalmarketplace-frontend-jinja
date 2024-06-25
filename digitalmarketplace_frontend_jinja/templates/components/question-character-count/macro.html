@@ -1,6 +1,6 @@
-{% macro digitalmarketplaceQuestionText(params) %}
-{%- from "govuk_frontend_jinja/components/input/macro.html" import govukInput -%}
-{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+{% macro digitalmarketplaceQuestionCharacterCount(params) %}
+{%- from "govuk_frontend_jinja/components/character-count/macro.html" import govukCharacterCount -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
 {% set questionText = params.question.question + " (optional)" if params.question.optional else params.question.question %}
@@ -15,11 +15,12 @@
   {% set formGroupClasses = "dm-form-group--declaration-reuse" %}
 {% endif %}
 
-{{ govukInput({
+{{ govukCharacterCount({
   "name": name,
   "id": "input-" + name,
+  "maxwords": params.question.max_length_in_words | string,
   "label": {
-    'html': questionText,
+    "html": questionText,
     "classes": "govuk-label--m"
   },
   "formGroup": {
@@ -28,7 +29,7 @@
   "hint": {
     "html": digitalmarketplaceQuestionFormatHint(params.question)
   } if params.question.hint or params.question.question_advice,
-  "value": params.data[name] if params.data,
+  "value": params.data[name] if params.data and params.data[name],
   "errorMessage": errorMessage if errorMessage
 }) }}
 {% endmacro %}

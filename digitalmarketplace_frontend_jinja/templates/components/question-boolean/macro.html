@@ -1,6 +1,6 @@
 {% macro digitalmarketplaceQuestionBoolean(params) %}
 {%- from "govuk_frontend_jinja/components/radios/macro.html" import govukRadios -%}
-{%- from "digitalmarketplace_frontend_jinja/components/question/macros/format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
+{%- from "digitalmarketplace_frontend_jinja/components/question-format-hint/macro.html" import digitalmarketplaceQuestionFormatHint -%}
 
 {% set name = params.question.id %}
 {% set valueToQuestions = {} %}

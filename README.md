@@ -71,7 +71,7 @@ To use a component in your project templates you must import and call the compon
 }) }}
 ```
 
-The options available to each component macro can be found in the original [CCS Digital Marketplace GOV.UK Frontend](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/tree/main/src/digitalmarketplace/components) documentation. Since this project is a like-for-like port, the only difference between the Nunjucks examples and their Jinja equivalents is having to quote key names, e.g. `'text'` instead of `text`.
+The options available to each component macro can be found in the original [CCS Digital Marketplace GOV.UK Frontend](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/tree/main/packages/digitalmarketplace-frontend/src/digitalmarketplace/components) documentation. Since this project is a like-for-like port, the only difference between the Nunjucks examples and their Jinja equivalents is having to quote key names, e.g. `'text'` instead of `text`.
 
 ## Versioning
 

@@ -1,7 +1,7 @@
 {% macro digitalmarketplaceSummaryContentNumber(params) %}
 {%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/text/macro.html" import digitalmarketplaceSummaryContentText -%}
 
-{% if params.value %}
+{% if params.value or params.value == 0 %}
   {{ digitalmarketplaceSummaryContentText({
     "text": params.value
   }) }}
