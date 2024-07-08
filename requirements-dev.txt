@@ -24,7 +24,7 @@ ccs-digitalmarketplace-utils==66.3.0
     # via ccs-digitalmarketplace-frontend-jinja
 ccs-govuk-frontend-jinja==1.2.0
     # via ccs-digitalmarketplace-frontend-jinja
-certifi==2023.11.17
+certifi==2024.7.4
     # via requests
 cffi==1.16.0
     # via cryptography
