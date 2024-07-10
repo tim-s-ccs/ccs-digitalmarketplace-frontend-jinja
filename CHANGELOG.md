@@ -2,6 +2,12 @@
 
 Records breaking changes from major version bumps.
 
+## 2.8.0
+
+Update ccs-digitalmarketplace-utils to v67 which, in turn, updates flask to v3.0
+
+Upgrade Digital Marketplace Frontend to v1.1
+
 ## 2.7.0
 
 Make updates for change from Digital Marketplace GOV.UK Frontend to Digital Marketplace Frontend
