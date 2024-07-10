@@ -4,6 +4,7 @@ Digital Marketplace Jinja Macros
 ![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+[![PyPI version](https://badge.fury.io/py/ccs-digitalmarketplace-frontend-jinja.svg)](https://badge.fury.io/py/ccs-digitalmarketplace-frontend-jinja)
 
 This repository provides a complete set of [Jinja](https://jinja.palletsprojects.com/) macros that are kept up-to-date and 100% compliant with [CCS Digital Marketplace GOV.UK Frontend](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend) Nunjucks macros. Porting is intentionally manual rather than automated to make updates simpler than maintaining an automated conversion routine. A comprehensive test suite ensures compliance against the latest, and every subsequent, CCS GOV.UK Frontend Frontend release.
 
