@@ -2,7 +2,7 @@
 
 Records breaking changes from major version bumps.
 
-## 2.8.0
+## 2.8.0rc1
 
 Update ccs-digitalmarketplace-utils to v67 which, in turn, updates flask to v3.0
 
