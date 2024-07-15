@@ -2,6 +2,12 @@
 
 Records breaking changes from major version bumps.
 
+## Unreleased
+
+Upgrade Digital Marketplace Frontend to v1.1.1
+
+Update CCS GOV.UK Frontend Jinja to v1.2.1 (GOV.UK Frontend 5.4.1)
+
 ## 2.8.0
 
 Update ccs-digitalmarketplace-utils to v67 which, in turn, updates flask to v3.0
@@ -12,7 +18,7 @@ Upgrade Digital Marketplace Frontend to v1.1
 
 Make updates for change from Digital Marketplace GOV.UK Frontend to Digital Marketplace Frontend
 
-Use CCS GOV.UK Frontend Jinja to v1.2 (GOV.UK Frontend 5.4.0)
+Update CCS GOV.UK Frontend Jinja to v1.2 (GOV.UK Frontend 5.4.0)
 
 
 ## 2.6.0
