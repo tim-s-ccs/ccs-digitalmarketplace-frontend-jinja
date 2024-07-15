@@ -54,7 +54,7 @@ class Test403:
 
         assert doc.xpath("//title")[0].text_content().strip() == 'Access denied - 403 – Digital Marketplace'
 
-        breadcrumbs = doc.xpath("//main/div/ol/li")
+        breadcrumbs = doc.xpath("//main/nav/ol/li")
 
         assert breadcrumbs[0].xpath('./a[@class="govuk-breadcrumbs__link"][@href="/"]')[0].text_content() == \
             'Admin home'
