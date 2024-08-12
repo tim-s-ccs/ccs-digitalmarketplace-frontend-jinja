@@ -81,7 +81,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-lxml==5.2.2
+lxml==5.3.0
     # via
     #   -r requirements-dev.in
     #   xmldiff
