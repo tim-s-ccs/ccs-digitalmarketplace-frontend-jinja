@@ -34,7 +34,7 @@ click==8.1.7
     # via flask
 contextlib2==21.6.0
     # via ccs-digitalmarketplace-utils
-cryptography==42.0.8
+cryptography==43.0.1
     # via ccs-digitalmarketplace-utils
 defusedxml==0.7.1
     # via odfpy
@@ -161,3 +161,4 @@ xmldiff==2.7.0
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
