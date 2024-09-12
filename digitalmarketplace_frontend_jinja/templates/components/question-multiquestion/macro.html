@@ -9,6 +9,12 @@
       "classes": 'govuk-fieldset__legend--m'
     }
   }) %}
+    {% if params.question.question_advice %}
+      <div class="govuk-body">
+        {{ params.question.question_advice | safe }}
+      </div>
+    {% endif %}
+
     {% for question in params.question.questions %}
       {{ digitalmarketplaceQuestion({
         "type": question.type,

@@ -4,7 +4,9 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
-Upgrade Digital Marketplace Frontend to v1.1.1
+## 2.9.0
+
+Upgrade Digital Marketplace Frontend to v1.2.0
 
 Update CCS GOV.UK Frontend Jinja to v1.2.1 (GOV.UK Frontend 5.4.1)
 
