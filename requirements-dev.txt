@@ -22,7 +22,7 @@ ccs-digitalmarketplace-apiclient==25.11.0
     # via ccs-digitalmarketplace-utils
 ccs-digitalmarketplace-utils==68.0.0
     # via ccs-digitalmarketplace-frontend-jinja
-ccs-govuk-frontend-jinja==1.2.2
+ccs-govuk-frontend-jinja==1.3.0
     # via ccs-digitalmarketplace-frontend-jinja
 certifi==2024.7.4
     # via requests
