@@ -6,10 +6,12 @@
 
 {% set name = params.question.id %}
 {% set errorMessage = params.errors[name] if params.errors %}
+{% set price = params.question.fields.price %}
 {% set minimumPrice = params.question.fields.minimum_price %}
 {% set maximumPrice = params.question.fields.maximum_price %}
 {% set priceUnit = params.question.fields.price_unit %}
 {% set priceInterval = params.question.fields.price_interval %}
+{% set optional_fields = params.question.optional_fields or [] %}
 
 {% call govukFieldset({
   "legend": {
@@ -33,8 +35,72 @@
     {% endif %}
 
     {% if priceUnit %}
-      {% set questionText = "Unit (optional)" if 'price_unit' in (params.question.optional_fields or []) else "Unit" %}
+      {% set questionText = "Unit (optional)" if 'price_unit' in optional_fields else "Unit" %}
       {% set value = params.data[priceUnit] if params.data %}
+
+      {% set units = params.question.units or [
+        {
+          "label": "a unit",
+          "value": "Unit"
+        },
+        {
+          "label": "a licence",
+          "value": "Licence"
+        },
+        {
+          "label": "a user",
+          "value": "User"
+        },
+        {
+          "label": "a device",
+          "value": "Device"
+        },
+        {
+          "label": "a instance",
+          "value": "Instance"
+        },
+        {
+          "label": "a server",
+          "value": "Server"
+        },
+        {
+          "label": "a virtual machine",
+          "value": "Virtual machine"
+        },
+        {
+          "label": "a transaction",
+          "value": "Transaction"
+        },
+        {
+          "label": "a megabyte",
+          "value": "Megabyte"
+        },
+        {
+          "label": "a gigabyte",
+          "value": "Gigabyte"
+        },
+        {
+          "label": "a terabyte",
+          "value": "Terabyte"
+        }
+      ] %}
+
+      {% set items = [] %}
+
+      {% set _items = items.append({
+        "text": "",
+        "value": "",
+        "selected": "" == value
+      }) %}
+
+      {% for unit in units %}
+        {% set unit_value = unit.value if unit.value else unit.label %}
+        {% set _items = items.append({
+          "text": unit.label,
+          "value": unit_value,
+          "selected": unit_value == value
+        }) %}
+      {% endfor %}
 
       {{ govukSelect({
         "id": "input-" + priceUnit,
@@ -42,74 +108,69 @@
         "label": {
           "html": questionText
         },
-        "items": [
-          {
-            'text': "",
-            "value": "",
-            "selected": "" == value
-          },
-          {
-            "text": "a unit",
-            "value": "Unit",
-            "selected": "Unit" == value
-          },
-          {
-            "text": "a licence",
-            "value": "Licence",
-            "selected": "Licence" == value
-          },
-          {
-            "text": "a user",
-            "value": "User",
-            "selected": "User" == value
-          },
-          {
-            "text": "a device",
-            "value": "Device",
-            "selected": "Device" == value
-          },
-          {
-            "text": "a instance",
-            "value": "Instance",
-            "selected": "Instance" == value
-          },
-          {
-            "text": "a server",
-            "value": "Server",
-            "selected": "Server" == value
-          },
-          {
-            "text": "a virtual machine",
-            "value": "Virtual machine",
-            "selected": "Virtual machine" == value
-          },
-          {
-            "text": "a transaction",
-            "value": "Transaction",
-            "selected": "Transaction" == value
-          },
-          {
-            "text": "a megabyte",
-            "value": "Megabyte",
-            "selected": "Megabyte" == value
-          },
-          {
-            "text": "a gigabyte",
-            "value": "Gigabyte",
-            "selected": "Gigabyte" == value
-          },
-          {
-            "text": "a terabyte",
-            "value": "Terabyte",
-            "selected": "Terabyte" == value
-          }
-        ]
+        "items": items
       }) }}
     {% endif %}
 
     {% if priceInterval %}
-      {% set questionText = "Time (optional)" if 'price_interval' in (params.question.optional_fields or []) else "Time" %}
+      {% set questionText = "Time (optional)" if 'price_interval' in optional_fields else "Time" %}
       {% set value = params.data[priceInterval] if params.data %}
+
+      {% set intervals = params.question.intervals or [
+        {
+          "label": "a second",
+          "value": "Second"
+        },
+        {
+          "label": "a minute",
+          "value": "Minute"
+        },
+        {
+          "label": "a hour",
+          "value": "Hour"
+        },
+        {
+          "label": "a day",
+          "value": "Day"
+        },
+        {
+          "label": "a week",
+          "value": "Week"
+        },
+        {
+          "label": "a month",
+          "value": "Month"
+        },
+        {
+          "label": "a quarter",
+          "value": "Quarter"
+        },
+        {
+          "label": "a 6 months",
+          "value": "6 months"
+        },
+        {
+          "label": "a year",
+          "value": "Year"
+        }
+      ] %}
+
+      {% set items = [] %}
+
+      {% set _items = items.append({
+        "text": "",
+        "value": "",
+        "selected": "" == value
+      }) %}
+
+      {% for interval in intervals %}
+        {% set interval_value = interval.value if interval.value else interval.label %}
+        {% set _items = items.append({
+          "text": interval.label,
+          "value": interval_value,
+          "selected": interval_value == value
+        }) %}
+      {% endfor %}
 
       {{ govukSelect({
         "id": "input-" + priceInterval,
@@ -117,63 +178,33 @@
         "label": {
           "text": questionText
         },
-        "items": [
-          {
-            "text": "",
-            "value": "",
-            "selected": "" == value
-          },
-          {
-            "text": "a second",
-            "value": "Second",
-            "selected": "Second" == value
-          },
-          {
-            "text": "a minute",
-            "value": "Minute",
-            "selected": "Minute" == value
-          },
-          {
-            "text": "a hour",
-            "value": "Hour",
-            "selected": "Hour" == value
-          },
-          {
-            "text": "a day",
-            "value": "Day",
-            "selected": "Day" == value
-          },
-          {
-            "text": "a week",
-            "value": "Week",
-            "selected": "Week" == value
-          },
-          {
-            "text": "a month",
-            "value": "Month",
-            "selected": "Month" == value
-          },
-          {
-            "text": "a quarter",
-            "value": "Quarter",
-            "selected": "Quarter" == value
-          },
-          {
-            "text": "a 6 months",
-            "value": "6 months",
-            "selected": "6 months" == value
-          },
-          {
-            "text": "a year",
-            "value": "Year",
-            "selected": "Year" == value
-          }
-        ]
+        "items": items
+      }) }}
+    {% endif %}
+
+    {% if price %}
+      {% set questionText = "Price (optional)" if 'price' in optional_fields else "Price" %}
+      {% set value = params.data[price] if params.data %}
+
+      {{ govukInput({
+        "id": "input-" + price,
+        "name": price,
+        "classes": "govuk-input--width-10",
+        "label": {
+          "text": questionText
+        },
+        'hint': {
+          "text": 'For example, £199.99'
+        },
+        "value": value,
+        "prefix": {
+          "text": "£"
+        }
       }) }}
     {% endif %}
 
     {% if minimumPrice %}
-      {% set questionText = "Minimum price (optional)" if 'minimum_price' in (params.question.optional_fields or []) else "Minimum price" %}
+      {% set questionText = "Minimum price (optional)" if 'minimum_price' in optional_fields else "Minimum price" %}
       {% set value = params.data[minimumPrice] if params.data %}
 
       {{ govukInput({
@@ -194,7 +225,7 @@
     {% endif %}
 
     {% if maximumPrice %}
-      {% set questionText = "Maximum price (optional)" if 'maximum_price' in (params.question.optional_fields or []) else "Maximum price" %}
+      {% set questionText = "Maximum price (optional)" if 'maximum_price' in optional_fields else "Maximum price" %}
       {% set value = params.data[maximumPrice] if params.data %}
 
       {{ govukInput({
