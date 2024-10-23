@@ -4,17 +4,34 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 2.10.0
+
+Upgrade Digital Marketplace Frontend to v1.3.1
+
+Update CCS GOV.UK Frontend Jinja to v1.3.0 (GOV.UK Frontend 5.7.1)
+
+🆕 New features:
+
+  Add macros for the following components:
+
+  | Component name  | Macro name                          |
+  |-----------------|-------------------------------------|
+  | Question select | `digitalmarketplaceQuestionSelect`  |
+
+
 ## 2.9.0
 
 Upgrade Digital Marketplace Frontend to v1.2.0
 
 Update CCS GOV.UK Frontend Jinja to v1.2.1 (GOV.UK Frontend 5.4.1)
 
+
 ## 2.8.0
 
 Update ccs-digitalmarketplace-utils to v67 which, in turn, updates flask to v3.0
 
 Upgrade Digital Marketplace Frontend to v1.1
+
 
 ## 2.7.0
 
