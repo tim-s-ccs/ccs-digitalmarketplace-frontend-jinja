@@ -147,7 +147,7 @@ urllib3==2.2.2
     #   botocore
     #   ccs-digitalmarketplace-utils
     #   requests
-werkzeug==3.0.3
+werkzeug==3.0.6
     # via
     #   ccs-digitalmarketplace-utils
     #   flask
