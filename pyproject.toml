@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ccs-digitalmarketplace-frontend-jinja"
+dynamic = ["version"]
+dependencies = [
+  'jinja2>3',
+  'ccs-govuk-frontend-jinja>=1.4,<2',
+  'ccs-digitalmarketplace-utils>=68.0.0',
+]
+requires-python = ">=3.10,<3.13"
+authors = [
+  {name = "CCS Developers"},
+]
+description = "Jinja templates for Digital Marketplace apps."
+readme = "README.md"
+license = {file = "LICENSE"}
+
+[project.urls]
+Homepage = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja"
+Repository = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja.git"
+Issues = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/issues"
+Changelog = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/CHANGELOG.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "digitalmarketplace_frontend_jinja.__version__"}
+
+[tool.setuptools.packages.find]
+exclude = ["node_modules*"]
+
+[tool.setuptools.package-data]
+digitalmarketplace_frontend_jinja = ["**/*.html"]

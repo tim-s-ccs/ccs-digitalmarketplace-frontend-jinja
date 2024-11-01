@@ -10,4 +10,4 @@ ignore = D203,W503,W504
 max-complexity = 12
 max-line-length = 120
 per-file-ignores =
-    app/__init__.py : E501
+    tests/utils/app.py : E501
