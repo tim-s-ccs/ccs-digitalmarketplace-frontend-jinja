@@ -4,6 +4,8 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 2.11.0
+
 Replace `setup.py` with `pyproject.toml`
 
 ## 2.10.0
