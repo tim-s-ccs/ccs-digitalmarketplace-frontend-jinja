@@ -4,6 +4,8 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+Replace `setup.py` with `pyproject.toml`
+
 ## 2.10.0
 
 Upgrade Digital Marketplace Frontend to v1.3.1

@@ -28,7 +28,7 @@ def create_app():
                     "digitalmarketplace_frontend_jinja": FileSystemLoader(
                         searchpath=os.path.join(
                             os.path.dirname(__file__),
-                            "../digitalmarketplace_frontend_jinja/templates"
+                            "../../digitalmarketplace_frontend_jinja/templates"
                         )
                     )
                 }
