@@ -1,17 +1,17 @@
 {% macro digitalmarketplaceSummaryContentBoolean(params) %}
-{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macros/text/macro.html" import digitalmarketplaceSummaryContentText -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content-text/macro.html" import digitalmarketplaceSummaryContentText -%}
 
 {% if params.value == true %}
   {{ digitalmarketplaceSummaryContentText({
-    "text": "Yes"
+    "value": "Yes"
   }) }}
 {% elif params.value == false %}
   {{ digitalmarketplaceSummaryContentText({
-    "text": "No"
+    "value": "No"
   }) }}
 {% else %}
   {{ digitalmarketplaceSummaryContentText({
-    "text": params.value
+    "value": params.value
   }) }}
 {% endif %}
 {% endmacro %}

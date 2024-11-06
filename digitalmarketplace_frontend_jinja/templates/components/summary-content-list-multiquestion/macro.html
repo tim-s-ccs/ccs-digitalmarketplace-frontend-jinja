@@ -1,0 +1,16 @@
+{% macro digitalmarketplaceSummaryContentListMultiquestion(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content-multiquestion/macro.html" import digitalmarketplaceSummaryContentMultiquestion -%}
+
+{% if params.value -%}
+  <div class="list-multiquestion govuk-body-s">
+    {% for multi_question in params.value %}
+      <div class="list-multiquestion__item govuk-body-s">
+        <p class="govuk-body govuk-!-margin-bottom-2">{{ multi_question.name }}</p>
+        {{ digitalmarketplaceSummaryContentMultiquestion({
+          "value": multi_question.value
+        }) }}
+      </div>
+    {% endfor %}
+  </div>
+{%- endif %}
+{% endmacro %}

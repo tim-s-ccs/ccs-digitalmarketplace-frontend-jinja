@@ -1,0 +1,19 @@
+{% macro digitalmarketplaceSummaryContentList(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content-text/macro.html" import digitalmarketplaceSummaryContentText -%}
+
+{% if params.value | length == 0 %}
+  {{ digitalmarketplaceSummaryContentText({
+    "value": ''
+  }) }}
+{% elif params.value | length == 1 %}
+  {{ digitalmarketplaceSummaryContentText({
+    "value": params.value[0]
+  }) }}
+{% elif params.value | length > 1 %}
+  <ul class="govuk-list govuk-list--bullet govuk-body-s">
+    {% for item in params.value %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endmacro %}
