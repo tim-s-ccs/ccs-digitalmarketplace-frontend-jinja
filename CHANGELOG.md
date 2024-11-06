@@ -4,6 +4,28 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 3.0.0rc1
+
+Upgrade Digital Marketplace Frontend to v2.0.0-beta.0
+
+🆕 New features:
+
+  Add macros for the following components:
+
+  | Component name                      | Macro name                                          |
+  |-------------------------------------|-----------------------------------------------------|
+  | Question list multiquestion         | `digitalmarketplaceQuestionListMultiquestion`       |
+  | Summary content text                | `digitalmarketplaceSummaryContentText`              |
+  | Summary content list                | `digitalmarketplaceSummaryContentList`              |
+  | Summary content upload              | `digitalmarketplaceSummaryContentUpload`            |
+  | Summary content service ID          | `digitalmarketplaceSummaryContentServiceId`         |
+  | Summary content radios              | `digitalmarketplaceSummaryContentRadios`            |
+  | Summary content boolean             | `digitalmarketplaceSummaryContentBoolean`           |
+  | Summary content number              | `digitalmarketplaceSummaryContentNumber`            |
+  | Summary content checkbox tree       | `digitalmarketplaceSummaryContentCheckboxTree`      |
+  | Summary content multiquestion       | `digitalmarketplaceSummaryContentMultiquestion`     |
+  | Summary content list multiquestion  | `digitalmarketplaceSummaryContentListMultiquestion` |
+
 ## 2.11.0
 
 Replace `setup.py` with `pyproject.toml`
