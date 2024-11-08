@@ -18,7 +18,7 @@
       },
       "attributes": {
         'data-module': "dm-question-list-multiquestion",
-        'data-max-number-of-items': params.question.max_number_of_items
+        'data-max-number-of-items': params.question.number_of_items
       }
     }) %}
       {% if params.question.question_advice %}
@@ -36,7 +36,7 @@
       <div class="dm-list-multiquestion__items">
         {% for multi_question in params.question.questions %}
           {% if multi_question.questions -%}
-            <div class="dm-list-multiquestion__item">
+            <div class="dm-list-multiquestion__item govuk-!-margin-bottom-6">
               {% call govukFieldset({
                 "legend": {
                   "text": multi_question.question,
@@ -51,7 +51,7 @@
 
                 <div class="govuk-grid-row">
                   {% for question in multi_question.questions %}
-                    <div class="dm-multiquestion__item-input-column govuk-grid-column-{{ params.question.column_width | default('one-half') }}">
+                    <div class="dm-multiquestion__item-input-column govuk-grid-column-{{ params.question.column_width or 'one-half' }}">
                       {{ digitalmarketplaceQuestion({
                         "type": question.type,
                         "question": question,
@@ -67,8 +67,6 @@
           {%- endif %}
         {% endfor %}
       </div>
-
-      <hr class="govuk-section-break govuk-section-break--m">
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
