@@ -5,7 +5,7 @@
   <div class="list-multiquestion govuk-body-s">
     {% for multi_question in params.value %}
       <div class="list-multiquestion__item govuk-body-s">
-        <p class="govuk-body govuk-!-margin-bottom-2">{{ multi_question.name }}</p>
+        <p class="govuk-body govuk-!-margin-bottom-2">{{ multi_question.name if multi_question.name else multi_question.question }}</p>
         {{ digitalmarketplaceSummaryContentMultiquestion({
           "value": multi_question.value
         }) }}

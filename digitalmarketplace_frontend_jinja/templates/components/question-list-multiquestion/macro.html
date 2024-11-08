@@ -1,79 +1,95 @@
 {% macro digitalmarketplaceQuestionListMultiquestion(params) %}
 {%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
 {%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question/macro.html" import digitalmarketplaceQuestion -%}
 
+{% set name = params.question.id %}
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% endif %}
+
 {% if params.question.questions -%}
-  {% call govukFieldset({
-    "legend": {
-      "text": params.question.question,
-      "classes": 'govuk-fieldset__legend--m'
-    },
-    "attributes": {
-      'data-module': "dm-question-list-multiquestion",
-      'data-max-number-of-items': params.max_number_of_items
-    }
-  }) %}
-    {% if params.question.question_advice %}
-      <div class="govuk-body">
-        {{ params.question.question_advice | safe }}
-      </div>
-    {% endif %}
+  <div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+    {% call govukFieldset({
+      "legend": {
+        "text": params.question.question,
+        "classes": 'govuk-fieldset__legend--m'
+      },
+      "attributes": {
+        'data-module': "dm-question-list-multiquestion",
+        'data-max-number-of-items': params.question.max_number_of_items
+      }
+    }) %}
+      {% if params.question.question_advice %}
+        <div class="govuk-body">
+          {{ params.question.question_advice | safe }}
+        </div>
+      {% endif %}
+      {% if errorMessage %}
+        {{ govukErrorMessage({
+          "id": "input-" + name + "-error",
+          "text": errorMessage.text
+        }) | trim | indent(2) }}
+      {% endif %}
 
-    <div class="dm-list-multiquestion__items">
-      {% for multi_question in params.question.questions %}
-        {% if multi_question.questions -%}
-          <div class="dm-list-multiquestion__item">
-            {% call govukFieldset({
-              "legend": {
-                "text": multi_question.question,
-                "classes": 'govuk-fieldset__legend--m'
-              }
-            }) %}
-              {% if multi_question.question_advice %}
-                <div class="govuk-body">
-                  {{ multi_question.question_advice | safe }}
-                </div>
-              {% endif %}
-
-              <div class="govuk-grid-row">
-                {% for question in multi_question.questions %}
-                  <div class="dm-multiquestion__item-input-column govuk-grid-column-{{ params.question.column_width | default('one-half') }}">
-                    {{ digitalmarketplaceQuestion({
-                      "type": question.type,
-                      "question": question,
-                      "data": params.data,
-                      "errors": params.errors,
-                      "frameworkReusedFrom": params.frameworkReusedFrom
-                    }) }}
+      <div class="dm-list-multiquestion__items">
+        {% for multi_question in params.question.questions %}
+          {% if multi_question.questions -%}
+            <div class="dm-list-multiquestion__item">
+              {% call govukFieldset({
+                "legend": {
+                  "text": multi_question.question,
+                  "classes": 'govuk-fieldset__legend--m'
+                }
+              }) %}
+                {% if multi_question.question_advice %}
+                  <div class="govuk-body">
+                    {{ multi_question.question_advice | safe }}
                   </div>
-                {% endfor %}
-              </div>
-            {% endcall %}
-          </div>
-        {%- endif %}
-      {% endfor %}
-    </div>
+                {% endif %}
 
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        {{ govukButton({
-            "html": 'Remove item <span class="govuk-visually-hidden"><span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
-            "classes": 'govuk-button--secondary dm-list-multiquestion__item-remove govuk-visually-hidden',
+                <div class="govuk-grid-row">
+                  {% for question in multi_question.questions %}
+                    <div class="dm-multiquestion__item-input-column govuk-grid-column-{{ params.question.column_width | default('one-half') }}">
+                      {{ digitalmarketplaceQuestion({
+                        "type": question.type,
+                        "question": question,
+                        "data": params.data,
+                        "errors": params.errors,
+                        "frameworkReusedFrom": params.frameworkReusedFrom
+                      }) }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endcall %}
+            </div>
+          {%- endif %}
+        {% endfor %}
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m">
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+          {{ govukButton({
+              "html": 'Remove item <span class="govuk-visually-hidden"><span class="dm-list-multiquestion__item-remove-counter">0</span></span>',
+              "classes": 'govuk-button--secondary dm-list-multiquestion__item-remove govuk-visually-hidden',
+              "type": 'button'
+            })}}
+        </div>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+          {{ govukButton({
+            "html": 'Add item (<span class="dm-list-multiquestion__item-add-counter">0</span> remaining)',
+            "classes": 'govuk-button--secondary dm-list-multiquestion__item-add govuk-visually-hidden',
             "type": 'button'
           })}}
+        </div>
       </div>
-    </div>
-
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        {{ govukButton({
-          "html": 'Add item (<span class="dm-list-multiquestion__item-add-counter">0</span> remaining)',
-          "classes": 'govuk-button--secondary dm-list-multiquestion__item-add govuk-visually-hidden',
-          "type": 'button'
-        })}}
-      </div>
-    </div>
-  {% endcall %}
+    {% endcall %}
+  </div>
 {%- endif %}
 {% endmacro %}
