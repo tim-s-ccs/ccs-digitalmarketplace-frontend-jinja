@@ -1,7 +1,6 @@
 Digital Marketplace Jinja Macros
 =========================
 
-![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
 [![PyPI version](https://badge.fury.io/py/ccs-digitalmarketplace-frontend-jinja.svg)](https://badge.fury.io/py/ccs-digitalmarketplace-frontend-jinja)

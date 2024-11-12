@@ -4,6 +4,8 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+Make Python 3.11 the minimum supported version
+
 ## 3.0.1
 
 Upgrade Digital Marketplace Frontend to v2.0.2
