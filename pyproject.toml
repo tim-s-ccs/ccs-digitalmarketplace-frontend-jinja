@@ -24,6 +24,16 @@ Repository = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace
 Issues = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/issues"
 Changelog = "https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-frontend-jinja/CHANGELOG.md"
 
+[project.optional-dependencies]
+dev = [
+  'flake8',
+  'mypy',
+  'pytest',
+  'lxml',
+  'xmldiff',
+  'flask',
+]
+
 [tool.setuptools.dynamic]
 version = {attr = "digitalmarketplace_frontend_jinja.__version__"}
 
@@ -32,3 +42,7 @@ exclude = ["node_modules*"]
 
 [tool.setuptools.package-data]
 digitalmarketplace_frontend_jinja = ["**/*.html"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:logging"
+testpaths = "tests"
