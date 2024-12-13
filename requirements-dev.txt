@@ -4,7 +4,7 @@
 #
 #    pip-compile --extra=dev --output-file=requirements-dev.txt pyproject.toml
 #
-blinker==1.8.2
+blinker==1.9.0
     # via flask
 boto3==1.35.80
     # via ccs-digitalmarketplace-utils
@@ -38,7 +38,7 @@ docopt==0.6.2
     # via notifications-python-client
 flake8==7.1.1
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-flask==3.0.3
+flask==3.1.0
     # via
     #   ccs-digitalmarketplace-apiclient
     #   ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
@@ -51,9 +51,9 @@ flask-gzip==0.2
     # via ccs-digitalmarketplace-utils
 flask-login==0.6.3
     # via ccs-digitalmarketplace-utils
-flask-session==0.6.0
+flask-session==0.8.0
     # via ccs-digitalmarketplace-utils
-flask-wtf==1.2.1
+flask-wtf==1.2.2
     # via ccs-digitalmarketplace-utils
 fleep==1.0.1
     # via ccs-digitalmarketplace-utils
@@ -138,7 +138,7 @@ urllib3==2.2.3
     #   botocore
     #   ccs-digitalmarketplace-utils
     #   requests
-werkzeug==3.0.6
+werkzeug==3.1.3
     # via
     #   ccs-digitalmarketplace-utils
     #   flask
