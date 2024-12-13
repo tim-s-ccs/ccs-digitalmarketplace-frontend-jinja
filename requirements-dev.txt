@@ -101,7 +101,7 @@ packaging==24.1
     # via pytest
 pluggy==1.5.0
     # via pytest
-pycodestyle==2.12.0
+pycodestyle==2.12.1
     # via flake8
 pycparser==2.22
     # via cffi
