@@ -14,11 +14,11 @@ botocore==1.35.80
     #   s3transfer
 cachelib==0.13.0
     # via flask-session
-ccs-digitalmarketplace-apiclient==28.0.0
+ccs-digitalmarketplace-apiclient==29.12.2
     # via ccs-digitalmarketplace-utils
-ccs-digitalmarketplace-utils==69.0.0
+ccs-digitalmarketplace-utils==69.0.1
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
-ccs-govuk-frontend-jinja==1.4.0
+ccs-govuk-frontend-jinja==1.4.1
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 certifi==2024.7.4
     # via requests
@@ -113,7 +113,7 @@ pytest==8.3.3
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 python-dateutil==2.9.0.post0
     # via botocore
-python-json-logger==2.0.7
+python-json-logger==3.2.0
     # via ccs-digitalmarketplace-utils
 pytz==2024.1
     # via ccs-digitalmarketplace-utils
