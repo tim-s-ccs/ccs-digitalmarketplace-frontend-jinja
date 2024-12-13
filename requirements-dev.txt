@@ -115,7 +115,7 @@ python-dateutil==2.9.0.post0
     # via botocore
 python-json-logger==3.2.0
     # via ccs-digitalmarketplace-utils
-pytz==2024.1
+pytz==2024.2
     # via ccs-digitalmarketplace-utils
 redis==5.2.1
     # via ccs-digitalmarketplace-utils
