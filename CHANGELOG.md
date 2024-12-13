@@ -4,7 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 3.0.2
+
 Make Python 3.11 the minimum supported version
+Update the `pyproject.toml` to add dev dependancies
 
 ## 3.0.1
 
