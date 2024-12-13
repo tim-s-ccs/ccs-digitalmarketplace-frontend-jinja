@@ -22,7 +22,7 @@ ccs-govuk-frontend-jinja==1.4.1
     # via ccs-digitalmarketplace-frontend-jinja (pyproject.toml)
 certifi==2024.8.30
     # via requests
-cffi==1.16.0
+cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.0
     # via requests
