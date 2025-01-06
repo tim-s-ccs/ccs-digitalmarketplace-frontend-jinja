@@ -133,7 +133,7 @@ typing-extensions==4.12.2
     # via mypy
 unicodecsv==0.14.1
     # via ccs-digitalmarketplace-utils
-urllib3==2.2.3
+urllib3==2.3.0
     # via
     #   botocore
     #   ccs-digitalmarketplace-utils
