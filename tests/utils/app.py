@@ -55,6 +55,14 @@ def create_app():
     def index() -> str:
         return "Hello there"
 
+    @main.get("/suppliers/add-item/<section_id>/<question_id>/<item_number>")
+    def add_item(section_id, question_id, item_number) -> str:
+        return "Hello there"
+
+    @main.get("/suppliers/remove-item/<section_id>/<question_id>/<item_number>")
+    def remove_item(section_id, question_id, item_number) -> str:
+        return "Hello there"
+
     app.register_blueprint(main)
 
     @app.post("/component/<string:component>")
