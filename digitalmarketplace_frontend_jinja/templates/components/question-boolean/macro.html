@@ -36,7 +36,15 @@
     "checked": option.value == params.data[name] if params.data
   } %}
   {% if valueToQuestions[option.value] %}
-    {% set _item = item.__setitem__('attributes', { 'data-target': valueToQuestions[option.value] }) %}
+    {% set data_targets = [] %}
+    {% for data_target in valueToQuestions[option.value].split(" ") %}
+      {% if params.listMultiQuestionIndex != undefined  %}
+        {% set _data_targets = data_targets.append("{}-{}".format(data_target, params.listMultiQuestionIndex)) %}
+      {% else %}
+        {% set _data_targets = data_targets.append(data_target) %}
+      {% endif %}
+    {% endfor %}
+    {% set _item = item.__setitem__('attributes', { 'data-target': " ".join(data_targets) }) %}
   {% endif %}
   {% set _items = items.append(item) %}
 {% endfor %}
