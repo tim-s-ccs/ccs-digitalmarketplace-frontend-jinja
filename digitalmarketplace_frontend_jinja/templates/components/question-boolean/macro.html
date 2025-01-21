@@ -38,8 +38,8 @@
   {% if valueToQuestions[option.value] %}
     {% set data_targets = [] %}
     {% for data_target in valueToQuestions[option.value].split(" ") %}
-      {% if params.listMultiQuestionIndex != undefined  %}
-        {% set _data_targets = data_targets.append("{}-{}".format(data_target, params.listMultiQuestionIndex)) %}
+      {% if params.list_multi_question_index != undefined  %}
+        {% set _data_targets = data_targets.append("{}-{}".format(data_target, params.list_multi_question_index)) %}
       {% else %}
         {% set _data_targets = data_targets.append(data_target) %}
       {% endif %}

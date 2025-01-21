@@ -1,0 +1,94 @@
+{% macro digitalmarketplaceQuestionListMultiquestionServerSide(params) %}
+{%- from "govuk_frontend_jinja/components/fieldset/macro.html" import govukFieldset -%}
+{%- from "govuk_frontend_jinja/components/button/macro.html" import govukButton -%}
+{%- from "govuk_frontend_jinja/components/error-message/macro.html" import govukErrorMessage -%}
+{%- from "govuk_frontend_jinja/components/details/macro.html" import govukDetails -%}
+{%- from "digitalmarketplace_frontend_jinja/components/summary-content/macro.html" import digitalmarketplaceSummaryContent -%}
+
+{% set name = params.question.id %}
+{% if params.errors and params.errors[name] %}
+  {% set errorMessage = { "text": params.errors[name]["message"] } %}
+{% endif %}
+
+{% if params.question.questions -%}
+  <div class="govuk-form-group {%- if errorMessage %} govuk-form-group--error{% endif %}">
+    {% call govukFieldset({
+      "legend": {
+        "text": params.question.question,
+        "classes": 'govuk-fieldset__legend--m'
+      }
+    }) %}
+      {% if params.question.question_advice %}
+        <div class="govuk-body">
+          {{ params.question.question_advice | safe }}
+        </div>
+      {% endif %}
+      {% if errorMessage %}
+        {{ govukErrorMessage({
+          "id": "input-" + name + "-error",
+          "text": errorMessage.text
+        }) | trim | indent(2) }}
+      {% endif %}
+
+      {% set number_of_items_added = params.get('data', {}).get(params.question.id, []) | length %}
+      <div class="dm-list-multiquestion__items">
+        {% for index in range(0, number_of_items_added)%}
+          {% set multi_question = params.question.questions[index] %}
+          {% if multi_question.questions -%}
+            <div class="dm-list-multiquestion__item">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  {% call govukDetails({
+                    "summaryText": multi_question.question
+                  }) %}
+                    {% for question in multi_question.questions %}
+                      <div class="dm-list-multiquestion__item-summary">
+                        <p class="govuk-body govuk-!-margin-bottom-1">{{ question.name if question.name else question.question }}</p>
+                        {{ digitalmarketplaceSummaryContent({
+                          "type": question.type,
+                          "value": params.data[params.question.id][index][question.id.split('-')[0]]
+                        }) }}
+                      </div>
+                    {% endfor %}
+                  {% endcall%}
+                </div>
+              </div>
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="govuk-button-group">
+                    {{ govukButton({
+                      "html": 'Edit item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                      "classes": 'govuk-button--secondary dm-list-multiquestion__item-edit',
+                      "href": url_for(params.server_side_options.add_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                    })}}
+                    {% if number_of_items_added > 1 %}
+                      {{ govukButton({
+                        "html": 'Remove item <span class="govuk-visually-hidden">{}</span>'.format(index + 1),
+                        "classes": 'govuk-button--warning dm-list-multiquestion__item-remove',
+                        "href": url_for(params.server_side_options.remove_endpoint, item_number=index, question_id=params.question.id, **params.server_side_options.endpoint_values)
+                      }) }}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--visible govuk-!-width-two-thirds govuk-!-margin-bottom-6">
+          {%- endif %}
+        {% endfor %}
+      </div>
+
+      {% if number_of_items_added < params.question.number_of_items %}
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-full">
+            {{ govukButton({
+              "html": 'Add item ({} remaining)'.format(params.question.number_of_items - number_of_items_added),
+              "classes": 'govuk-button--secondary dm-list-multiquestion__item-add',
+              "href": url_for(params.server_side_options.add_endpoint, item_number=number_of_items_added, question_id=params.question.id, **params.server_side_options.endpoint_values)
+            })}}
+          </div>
+        </div>
+      {% endif %}
+    {% endcall %}
+  </div>
+{%- endif %}
+{% endmacro %}
