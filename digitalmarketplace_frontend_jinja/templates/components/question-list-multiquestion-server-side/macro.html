@@ -30,7 +30,7 @@
         }) | trim | indent(2) }}
       {% endif %}
 
-      {% set number_of_items_added = params.get('data', {}).get(params.question.id, []) | length %}
+      {% set number_of_items_added = (params.get('data', {}).get(params.question.id) or []) | length %}
       <div class="dm-list-multiquestion__items">
         {% for index in range(0, number_of_items_added)%}
           {% set multi_question = params.question.questions[index] %}

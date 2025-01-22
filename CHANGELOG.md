@@ -4,6 +4,10 @@ Records breaking changes from major version bumps.
 
 ## Unreleased
 
+## 3.2.1
+
+Fix bug with `number_of_items` in list multiquestion server side
+
 ## 3.2.0
 
 Upgrade Digital Marketplace Frontend to v2.2.0
