@@ -13,7 +13,6 @@
 {%- from "digitalmarketplace_frontend_jinja/components/question-select/macro.html" import digitalmarketplaceQuestionSelect -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-multiquestion/macro.html" import digitalmarketplaceQuestionMultiquestion -%}
 {%- from "digitalmarketplace_frontend_jinja/components/question-list-multiquestion/macro.html" import digitalmarketplaceQuestionListMultiquestion -%}
-{%- from "digitalmarketplace_frontend_jinja/components/question-list-multiquestion-server-side/macro.html" import digitalmarketplaceQuestionListMultiquestionServerSide -%}
 
 <div
   class="question {% if params.question.hidden %}js-hidden dm-question__related-information" aria-hidden="false{% endif %}"
@@ -49,8 +48,6 @@
     {{ digitalmarketplaceQuestionMultiquestion(params) }}
   {% elif params.type == 'list_multiquestion' %}
     {{ digitalmarketplaceQuestionListMultiquestion(params) }}
-  {% elif params.type == 'list_multiquestion_server_side' %}
-    {{ digitalmarketplaceQuestionListMultiquestionServerSide(params) }}
   {% endif %}
 </div>
 

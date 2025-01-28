@@ -189,8 +189,9 @@ def test_all_jinja_templates_exist():
 #         })
 #     )
 #     assert response.status_code == 200
-#     print('---TEST---')
+#     print('---Fixture---')
 #     print(html_to_one_line(fixture_html))
+#     print('---TEST---')
 #     print(html_to_one_line(response.get_data().decode("utf-8")))
 #     assert_generated_html_matches_fixture(
 #         response,
