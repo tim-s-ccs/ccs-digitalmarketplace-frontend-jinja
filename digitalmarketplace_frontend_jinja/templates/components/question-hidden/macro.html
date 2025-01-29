@@ -1,0 +1,97 @@
+{% macro digitalmarketplaceQuestionHidden(params) %}
+{%- from "digitalmarketplace_frontend_jinja/components/question-hidden/macro.html" import digitalmarketplaceQuestionHidden -%}
+
+{% macro digitalmarketplaceQuestionTextHidden(params) %}
+  {% set name = params.question.id %}
+  {% set value = params.data[name] if params.data %}
+  <input type="hidden" id="input-{{ name }}" name="{{ name }}" value="{{ value }}">
+{% endmacro %}
+
+{% macro digitalmarketplaceQuestionPricingHidden(params) %}
+  {% set price = params.question.fields.price %}
+  {% set minimumPrice = params.question.fields.minimum_price %}
+  {% set maximumPrice = params.question.fields.maximum_price %}
+  {% set priceUnit = params.question.fields.price_unit %}
+  {% set priceInterval = params.question.fields.price_interval %}
+
+  {% for questionPart in [priceUnit, priceInterval, price, minimumPrice, maximumPrice] %}
+    {% if questionPart %}
+      {% set value = params.data[questionPart] if params.data %}
+      <input type="hidden" id="input-{{ questionPart }}" name="{{ questionPart }}" value="{{ value }}">
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro digitalmarketplaceQuestionDateHidden(params) %}
+  {% set name = params.question.id %}
+
+  {% if params.data and params.data[name] %}
+    {% set dateParts = params.data[name].split('-') | reverse | list %}
+  {% else %}
+    {% set dateParts = [] %}
+  {% endif %}
+
+  <input type="hidden" id="input-{{ name }}-day" name="{{ name }}-day" value="{{ dateParts[0] }}">
+  <input type="hidden" id="input-{{ name }}-month" name="{{ name }}-month" value="{{ dateParts[1] }}">
+  <input type="hidden" id="input-{{ name }}-year" name="{{ name }}-year" value="{{ dateParts[2] }}">
+{% endmacro %}
+
+{% macro digitalmarketplaceQuestionCheckboxesHidden(params) %}
+  {% set name = params.question.id %}
+  {% for value in (params.data and params.data[name] or []) %}
+    <input type="hidden" id="input-{{ name }}-{{ loop.index }}" name="{{ name }}[]" value="{{ value }}">
+  {% endfor %}
+{% endmacro %}
+
+{% macro digitalmarketplaceQuestionMultiquestionHidden(params) %}
+  {% if params.question.questions -%}
+    {% for question in params.question.questions %}
+      {{ digitalmarketplaceQuestionHidden({
+        "type": question.type,
+        "question": question,
+        "data": params.data
+      }) }}
+    {% endfor %}
+  {%- endif %}
+{% endmacro %}
+
+{% macro digitalmarketplaceQuestionListMultiquestionHidden(params) %}
+  {% if params.question.questions -%}
+    {% for question in params.question.questions %}
+      {% set index = loop.index - 1 %}
+      {% if params.data and params.data[params.question.id] %}
+        {% set itemAnswers = (params.data[params.question.id][index] or {})%}
+      {% else %}
+        {% set itemAnswers = {} %}
+      {% endif %}
+      {% set data = {} %}
+      {% for key, value in itemAnswers.items() %}
+        {% set _ = data.__setitem__(key + "-" + (index | string), value) %}
+      {% endfor %}
+      {{ digitalmarketplaceQuestionMultiquestionHidden({
+        "question": question,
+        'data': data
+      }) }}
+    {% endfor %}
+  {%- endif %}
+{% endmacro %}
+
+<div
+  class="govuk-visually-hidden"
+  id="{{ params.question.id }}"
+>
+  {% if params.type in ['text', 'number', 'textbox_large', 'radios', 'boolean', 'select'] %}
+    {{ digitalmarketplaceQuestionTextHidden(params) }}
+  {% elif params.type == 'pricing' %}
+    {{ digitalmarketplaceQuestionPricingHidden(params) }}
+  {% elif params.type == 'date' %}
+    {{ digitalmarketplaceQuestionDateHidden(params) }}
+  {% elif params.type in ['checkboxes', 'checkbox_tree', 'list'] %}
+    {{ digitalmarketplaceQuestionCheckboxesHidden(params) }}
+  {% elif params.type == 'multiquestion' %}
+    {{ digitalmarketplaceQuestionMultiquestionHidden(params) }}
+  {% elif params.type == 'list_multiquestion' %}
+    {{ digitalmarketplaceQuestionListMultiquestionHidden(params) }}
+  {% endif %}
+</div>
+{% endmacro %}
