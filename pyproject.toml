@@ -10,7 +10,7 @@ dependencies = [
   'ccs-govuk-frontend-jinja>=1.4,<2',
   'ccs-digitalmarketplace-utils>=69.0.0',
 ]
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<3.14"
 authors = [
   {name = "CCS Developers"},
 ]
