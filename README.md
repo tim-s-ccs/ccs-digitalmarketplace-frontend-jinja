@@ -3,6 +3,7 @@ Digital Marketplace Jinja Macros
 
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)
 [![PyPI version](https://badge.fury.io/py/ccs-digitalmarketplace-frontend-jinja.svg)](https://badge.fury.io/py/ccs-digitalmarketplace-frontend-jinja)
 
 This repository provides a complete set of [Jinja](https://jinja.palletsprojects.com/) macros that are kept up-to-date and 100% compliant with [CCS Digital Marketplace GOV.UK Frontend](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend) Nunjucks macros. Porting is intentionally manual rather than automated to make updates simpler than maintaining an automated conversion routine. A comprehensive test suite ensures compliance against the latest, and every subsequent, CCS GOV.UK Frontend Frontend release.
@@ -15,6 +16,7 @@ The following table shows the version of Digital Marketplace Frontend Jinja that
 
 | Digital Marketplace Frontend Jinja Version | Target CCS Digital Marketplace GOV.UK Frontend Version |
 | ------------------------------------------ | ------------------------------------------------------ |
+| [3.3.1](https://github.com/tim-s-ccs/ccs-digitalmarketplace-frontend-jinja/releases/tag/3.3.1) | [2.3.1](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v2.3.1) |
 | [3.3.0](https://github.com/tim-s-ccs/ccs-digitalmarketplace-frontend-jinja/releases/tag/3.3.0) | [2.3.0](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v2.3.0) |
 | [3.2.0](https://github.com/tim-s-ccs/ccs-digitalmarketplace-frontend-jinja/releases/tag/3.2.0) | [2.2.0](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v2.2.0) |
 | [3.1.0](https://github.com/tim-s-ccs/ccs-digitalmarketplace-frontend-jinja/releases/tag/3.1.0) | [2.1.1](https://github.com/Crown-Commercial-Service/ccs-digitalmarketplace-govuk-frontend/releases/tag/v2.1.1) |

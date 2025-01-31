@@ -3,7 +3,7 @@
 
 {% macro digitalmarketplaceQuestionTextHidden(params) %}
   {% set name = params.question.id %}
-  {% set value = params.data[name] if params.data %}
+  {% set value = params.data[name] if params.data and params.data[name] %}
   <input type="hidden" id="input-{{ name }}" name="{{ name }}" value="{{ value }}">
 {% endmacro %}
 
@@ -16,7 +16,7 @@
 
   {% for questionPart in [priceUnit, priceInterval, price, minimumPrice, maximumPrice] %}
     {% if questionPart %}
-      {% set value = params.data[questionPart] if params.data %}
+      {% set value = params.data[questionPart] if params.data and params.data[questionPart] %}
       <input type="hidden" id="input-{{ questionPart }}" name="{{ questionPart }}" value="{{ value }}">
     {% endif %}
   {% endfor %}
